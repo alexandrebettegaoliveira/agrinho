@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Agronegócio Moderno e Inteligente</title>
+    <title>Portal do Agronegócio Inteligente & Conectado</title>
     
+    <!-- Biblioteca Chart.js para o Gráfico Dinâmico -->
+    <script src="https://jsdelivr.net"></script>
+
     <!-- CSS Unificado -->
     <style>
         /* Reset Geral */
@@ -183,6 +186,15 @@
             color: #2d6a4f;
         }
 
+        /* Seção de Notícias */
+        .news-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
         /* Layout Duas Colunas (Sustentabilidade) */
         .two-column {
             display: flex;
@@ -253,16 +265,16 @@
             display: none;
         }
 
-        .calc-result p {
-            margin-bottom: 5px;
-            font-weight: 500;
+        /* Painel do Mercado e Gráficos */
+        .market-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
         }
 
-        /* Tabelas de Mercado */
-        .table-container {
-            max-width: 800px;
-            margin: 0 auto;
-            overflow-x: auto;
+        .market-table, .market-chart {
+            flex: 1;
+            min-width: 300px;
         }
 
         table {
@@ -357,6 +369,7 @@
             <ul>
                 <li><a href="#home">Início</a></li>
                 <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#noticias">Notícias</a></li>
                 <li><a href="#sustentabilidade">Sustentabilidade</a></li>
                 <li><a href="#calculadora">Calculadora</a></li>
                 <li><a href="#mercado">Mercado</a></li>
@@ -380,16 +393,6 @@
 
     <!-- Seção de Tecnologia -->
     <section id="tecnologia" class="section-padding">
-        <h2>Inovação no Campo</h2>
-        <p class="subtitle">Como a tecnologia está transformando a produção agrícola.</p>
-        <div class="grid-container">
-            <div class="card">
-                <h3>Drones e Sensores</h3>
-                <p>Mapeamento térmico e monitoramento de pragas em tempo real direto do céu.</p>
-            </div>
-            <div class="card">
-            </div>
-        </div>
     </section>
 </body>
 </html>

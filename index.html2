@@ -1,346 +1,230 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroTech - O Futuro do Campo</title>
-    
-    <style>
-        /* ==================== CSS (ESTILO) ==================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: #f4f7f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: #1b4332;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        header .logo span {
-            color: #52b788;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            color: #52b788;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://unsplash.com') no-repeat center center/cover;
-            height: 65vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 46px;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            background-color: #52b788;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 16px;
-        }
-
-        .btn:hover {
-            background-color: #40916c;
-        }
-
-        .container {
-            padding: 60px 10%;
-            text-align: center;
-        }
-
-        .bg-white {
-            background-color: white;
-        }
-
-        .features {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            background-color: #e9f5ed;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .card h3 {
-            color: #1b4332;
-            margin-bottom: 15px;
-        }
-
-        /* 📊 ESTILOS DA TABELA DE COTAÇÕES */
-        .table-container {
-            max-width: 800px;
-            margin: 20px auto;
-            overflow-x: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #2d6a4f;
-            color: white;
-        }
-
-        .alta { color: #2b9348; font-weight: bold; }
-        .baixa { color: #d90429; font-weight: bold; }
-
-        /* 🧮 ESTILOS DO SIMULADOR */
-        .simulador-box {
-            max-width: 500px;
-            margin: 0 auto;
-            background: #e9f5ed;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            text-align: left;
-        }
-
-        .simulador-box label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #1b4332;
-        }
-
-        .simulador-box input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .resultado-simulador {
-            margin-top: 15px;
-            padding: 15px;
-            background: white;
-            border-left: 5px solid #52b788;
-            font-weight: bold;
-            display: none;
-        }
-
-        footer {
-            background-color: #1b4332;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
-
-        /* ♿ BOTÃO DE ACESSIBILIDADE */
-        .btn-acessibilidade {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #028090;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-
-        .btn-acessibilidade:hover {
-            transform: scale(1.1);
-        }
-
-        /* 🌓 CLASSE DE ALTO CONTRASTE */
-        body.alto-contraste {
-            background-color: #000 !important;
-            color: #fff !important;
-        }
-
-        body.alto-contraste header, 
-        body.alto-contraste footer,
-        body.alto-contraste .card,
-        body.alto-contraste .table-container,
-        body.alto-contraste .simulador-box,
-        body.alto-contraste .resultado-simulador {
-            background-color: #111 !important;
-            border: 1px solid #fff;
-            color: #fff !important;
-        }
-
-        body.alto-contraste nav a,
-        body.alto-contraste .card h3,
-        body.alto-contraste .simulador-box label,
-        body.alto-contraste td,
-        body.alto-contraste th {
-            color: #ff0 !important;
-        }
-
-        body.alto-contraste .btn {
-            background-color: #ff0 !important;
-            color: #000 !important;
-        }
-        
-        body.alto-contraste .alta, body.alto-contraste .baixa {
-            color: #fff !important;
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ==================== CONTEÚDO (HTML) ==================== -->
-    <header>
-        <div class="logo">Agro<span>Tech</span></div>
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#tecnologia">Tecnologia</a>
-            <a href="#cotacoes">Mercado</a>
-            <a href="#simulador">Calculadora</a>
-        </nav>
-    </header>
-
-    <!-- Banner Principal (URL corrigida) -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>Inovação e Sustentabilidade no Campo</h1>
-            <p>Conectando tecnologia de ponta com a produção agrícola.</p>
-            <a href="#tecnologia" class="btn">Conhecer Soluções</a>
+<html>
+<!-- ==================== SEÇÃO: SERVIÇOS (CONTINUAÇÃO) ==================== -->
+<section class="services-section">
+    <div class="services-container">
+        <!-- Card 3 -->
+        <div class="service-card">
+            <h3>Automação de Maquinário</h3>
+            <p>Integração de sistemas inteligentes para otimizar o plantio e a colheita automotiva.</p>
         </div>
-    </section>
-
-    <!-- Quem Somos -->
-    <section id="sobre" class="container bg-white">
-        <h2>Quem Somos</h2>
-        <p style="max-width: 800px; margin: 20px auto 0 auto;">Somos líderes na transformação digital do agronegócio, desenvolvendo soluções inteligentes que aumentam a produtividade da lavoura. Atuamos integrando inteligência de dados, maquinários conectados e responsabilidade socioambiental.</p>
-    </section>
-
-    <!-- Tecnologias Expandidas -->
-    <section id="tecnologia" class="features container">
-        <div class="card">
-            <h3>Drones e Mapeamento</h3>
-            <p>Monitoramento aéreo detalhado da saúde da lavoura em tempo real e detecção precoce de pragas.</p>
+        <!-- Card 4 -->
+        <div class="service-card">
+            <h3>Dashboards de Produtividade</h3>
+            <p>Relatórios em tempo real para tomada de decisões financeiras e operacionais rápidas.</p>
         </div>
-        <div class="card">
-            <h3>Gestão de Solo</h3>
-            <p>Análise profunda de dados climáticos e sensores inteligentes de umidade para irrigação precisa.</p>
-        </div>
-        <div class="card">
-            <h3>Big Data Agro</h3>
-            <p>Cruzamento de dados históricos e previsões preditivas para auxiliar na tomada de decisão da colheita.</p>
-        </div>
-    </section>
+    </div>
+</section>
 
-    <!-- NOVA SEÇÃO: Mercado e Commodities em Tempo Real -->
-    <section id="cotacoes" class="container bg-white">
-        <h2>Cotações do Mercado</h2>
-        <p>Acompanhe os valores médios das principais commodities agrícolas do país.</p>
-        
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Unidade</th>
-                        <th>Preço Base</th>
-                        <th>Variação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Soja</td>
-                        <td>Saca (60kg)</td>
-                        <td>R$ 138,50</td>
-                        <td class="alta">+1,24% ▲</td>
-                    </tr>
-                    <tr>
-                        <td>Milho</td>
-                        <td>Saca (60kg)</td>
-                        <td>R$ 62,10</td>
-                        <td class="baixa">-0.45% ▼</td>
-                    </tr>
-                    <tr>
-                        <td>Café Arábica</td>
-                        <td>Saca (60kg)</td>
-                        <td>R$ 1.045,00</td>
-                        <td class="alta">+2,10% ▲</td>
-                    </tr>
-                    <tr>
-                        <td>Algodão</td>
-                        <td>Arroba (15kg)</td>
-                        <td>R$ 142,30</td>
+<!-- ==================== SEÇÃO: RESULTADOS (NÚMEROS) ==================== -->
+<section class="results-section">
+    <div class="results-container">
+        <div class="result-item">
+            <h2 class="counter" data-target="35">+0</h2>
+            <p>Eficiência no uso de água e insumos</p>
+        </div>
+        <div class="result-item">
+            <h2 class="counter" data-target="24">0</h2>
+            <p>Horas de monitoramento contínuo</p>
+        </div>
+        <div class="result-item">
+            <h2 class="counter" data-target="20">-0</h2>
+            <p>Redução nos custos operacionais</p>
+        </div>
+    </div>
+</section>
 </html>
+<!-- ==================== RODAPÉ (FOOTER) ==================== -->
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h2>AgroTech</h2>
+            <p>Transformando o futuro do agronegócio com inovação e sustentabilidade.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Tecnologia</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h4>Contato</h4>
+            <p>E-mail: contato@agrotech.com</p>
+            <p>Telefone: (11) 99999-9999</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 AgroTech. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<!-- ==================== ESTILOS CSS ==================== -->
+<style>
+    /* Reset e Variáveis de Cores (Alinhar com o seu design) */
+    :root {
+        --green-dark: #0f3025;     /* Tom verde do seu menu */
+        --green-accent: #2ecc71;   /* Tom verde do seu botão */
+        --bg-light: #f4f7f6;       /* Cor de fundo clara */
+        --text-dark: #333333;
+        --text-light: #ffffff;
+    }
+
+    /* Container de Serviços */
+    .services-section {
+        background-color: var(--bg-light);
+        padding: 0 20px 60px 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .services-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .service-card {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+    }
+
+    .service-card h3 {
+        color: var(--green-dark);
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+
+    .service-card p {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* Seção de Resultados */
+    .results-section {
+        background-color: var(--green-dark);
+        color: var(--text-light);
+        padding: 80px 20px;
+        text-align: center;
+    }
+
+    .results-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 40px;
+    }
+
+    .result-item h2 {
+        font-size: 3rem;
+        color: var(--green-accent);
+        margin-bottom: 10px;
+    }
+
+    .result-item p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    /* Rodapé */
+    .main-footer {
+        background-color: #111;
+        color: #bbb;
+        padding: 60px 20px 20px 20px;
+        font-size: 0.9rem;
+    }
+
+    .footer-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        border-bottom: 1px solid #222;
+        padding-bottom: 40px;
+    }
+
+    .footer-brand h2 {
+        color: var(--text-light);
+        margin-bottom: 15px;
+    }
+
+    .footer-links h4, .footer-contact h4 {
+        color: var(--text-light);
+        margin-bottom: 15px;
+    }
+
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-links ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-links ul li a {
+        color: #bbb;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-links ul li a:hover {
+        color: var(--green-accent);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 0.8rem;
+    }
+</style>
+
+<!-- ==================== SCRIPT JAVASCRIPT ==================== -->
+<script>
+    // Efeito de contagem animada para a seção de resultados
+    document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 50; // Quanto menor, mais rápida a animação
+
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                // Remove caracteres especiais para fazer o cálculo matemático puro
+                const currentText = counter.innerText.replace('+', '').replace('-', '');
+                const count = +currentText;
+
+                const increment = target / speed;
+
+                if (count < target) {
+                    const nextValue = Math.ceil(count + increment);
+                    // Recoloca os sinais visuais de positivo ou negativo conforme o alvo
+                    if (counter.getAttribute('data-target') == "35") {
+                        counter.innerText = `+${nextValue}%`;
+                    } else if (counter.getAttribute('data-target') == "20") {
+                        counter.innerText = `-${nextValue}%`;
+                    } else {
+                        counter.innerText = nextValue;
+                    }
+                    setTimeout(updateCount, 20);
+                } else {
+                    // Garante que o número final exato seja exibido com os sufixos corretos
+                    if (target === 35) counter.innerText = "+35%";
+                    else if (target === 20) counter.innerText = "-20%";
+                    else counter.innerText = "24h";
+                }
+            };
+
+            updateCount();
+        });
+    });
+</script>

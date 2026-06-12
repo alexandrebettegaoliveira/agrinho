@@ -2,137 +2,177 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Jogo de Carro 2D</title>
+    <title>Jogo de Carro com JavaScript</title>
+    
+    <!-- ESTILO (CSS): Cuida das cores e posições na tela -->
     <style>
         body {
             margin: 0;
-            background: #222;
+            background-color: #1a1a1a;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-family: Arial, sans-serif;
-            color: white;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
             overflow: hidden;
         }
-        #gameCanvas {
+        #tela-jogo {
             border: 4px solid #fff;
-            background: #444;
+            background-color: #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
-        #score {
+        #placar {
             position: absolute;
             top: 20px;
-            font-size: 24px;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px #000;
         }
     </style>
 </head>
 <body>
 
-    <div id="score">Pontos: 0</div>
-    <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <div id="placar">Pontos: 0</div>
+    <canvas id="tela-jogo" width="400" height="500"></canvas>
 
+    <!-- LÓGICA (JavaScript): Controla as regras, movimentos e o jogo -->
     <script>
-        const canvas = document.getElementById("gameCanvas");
+        // 1. Configurações Iniciais da Tela
+        const canvas = document.getElementById("tela-jogo");
         const ctx = canvas.getContext("2d");
-        const scoreElement = document.getElementById("score");
+        const elementoPlacar = document.getElementById("placar");
 
-        let score = 0;
-        let gameOver = false;
+        let pontos = 0;
+        let fimDeJogo = false;
 
-        // Configurações do jogador (Carro Azul)
-        const player = {
+        // 2. Objeto do Jogador (Carro Azul)
+        const jogador = {
             x: 175,
-            y: 420,
-            width: 50,
-            height: 70,
-            speed: 7
+            y: 410,
+            largura: 50,
+            altura: 80,
+            velocidade: 8,
+            desenhar() {
+                ctx.fillStyle = "#00aaff"; // Azul
+                ctx.fillRect(this.x, this.y, this.largura, this.altura);
+                
+                // Detalhes do carro (Rodas)
+                ctx.fillStyle = "#000";
+                ctx.fillRect(this.x - 5, this.y + 10, 5, 20);
+                ctx.fillRect(this.x + this.largura, this.y + 10, 5, 20);
+                ctx.fillRect(this.x - 5, this.y + 50, 5, 20);
+                ctx.fillRect(this.x + this.largura, this.y + 50, 5, 20);
+            }
         };
 
-        // Configurações do obstáculo (Carro Vermelho)
-        const obstacle = {
+        // 3. Objeto do Obstáculo (Carro Vermelho)
+        const obstaculo = {
             x: Math.random() * (canvas.width - 50),
-            y: -70,
-            width: 50,
-            height: 70,
-            speed: 5
+            y: -80,
+            largura: 50,
+            altura: 80,
+            velocidade: 6,
+            desenhar() {
+                ctx.fillStyle = "#ff4444"; // Vermelho
+                ctx.fillRect(this.x, this.y, this.largura, this.altura);
+                
+                // Detalhes do obstáculo (Rodas)
+                ctx.fillStyle = "#000";
+                ctx.fillRect(this.x - 5, this.y + 10, 5, 20);
+                ctx.fillRect(this.x + this.largura, this.y + 10, 5, 20);
+                ctx.fillRect(this.x - 5, this.y + 50, 5, 20);
+                ctx.fillRect(this.x + this.largura, this.y + 50, 5, 20);
+            }
         };
 
-        // Controle do teclado
-        const keys = { Left: false, Right: false };
+        // 4. Controle do Teclado (Eventos JavaScript)
+        const teclas = { SetaEsquerda: false, SetaDireita: false };
 
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowLeft") keys.Left = true;
-            if (e.key === "ArrowRight") keys.Right = true;
+        document.addEventListener("keydown", (evento) => {
+            if (evento.key === "ArrowLeft") teclas.SetaEsquerda = true;
+            if (evento.key === "ArrowRight") teclas.SetaDireita = true;
         });
 
-        document.addEventListener("keyup", (e) => {
-            if (e.key === "ArrowLeft") keys.Left = false;
-            if (e.key === "ArrowRight") keys.Right = false;
+        document.addEventListener("keyup", (evento) => {
+            if (evento.key === "ArrowLeft") teclas.SetaEsquerda = false;
+            if (evento.key === "ArrowRight") teclas.SetaDireita = false;
         });
 
-        // Loop principal do jogo
-        function update() {
-            if (gameOver) return;
+        // 5. Função de Colisão (Matemática no JavaScript)
+        function verificarColisao(obj1, obj2) {
+            return (
+                obj1.x < obj2.x + obj2.largura &&
+                obj1.x + obj1.largura > obj2.x &&
+                obj1.y < obj2.y + obj2.altura &&
+                obj1.y + obj1.altura > obj2.y
+            );
+        }
 
-            // Limpa a tela
+        // 6. Loop Principal do Jogo (Atualiza a tela 60 vezes por segundo)
+        function atualizarJogo() {
+            if (fimDeJogo) return;
+
+            // Limpa a tela anterior
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Desenha a linha central da estrada (efeito de movimento)
+            // Desenha a sinalização da pista
             ctx.strokeStyle = "#fff";
+            ctx.lineWidth = 6;
             ctx.setLineDash([20, 20]);
-            ctx.lineWidth = 4;
             ctx.beginPath();
             ctx.moveTo(canvas.width / 2, 0);
             ctx.lineTo(canvas.width / 2, canvas.height);
             ctx.stroke();
 
-            // Move o jogador
-            if (keys.Left && player.x > 0) player.x -= player.speed;
-            if (keys.Right && player.x < canvas.width - player.width) player.x += player.speed;
-
-            // Desenha o jogador (Retângulo azul simulando um carro)
-            ctx.fillStyle = "#00aaff";
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-
-            // Move o obstáculo
-            obstacle.y += obstacle.speed;
-
-            // Desenha o obstáculo (Retângulo vermelho)
-            ctx.fillStyle = "#ff4444";
-            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-
-            // Verifica se o obstáculo passou da tela
-            if (obstacle.y > canvas.height) {
-                obstacle.y = -70;
-                obstacle.x = Math.random() * (canvas.width - obstacle.width);
-                score++;
-                obstacle.speed += 0.3; // Aumenta a velocidade aos poucos
-                scoreElement.innerText = "Pontos: " + score;
+            // Movimenta o Jogador
+            if (teclas.SetaEsquerda && jogador.x > 0) {
+                jogador.x -= jogador.velocidade;
+            }
+            if (teclas.SetaDireita && jogador.x < canvas.width - jogador.largura) {
+                jogador.x += jogador.velocidade;
             }
 
-            // Detecção de colisão simples
-            if (
-                player.x < obstacle.x + obstacle.width &&
-                player.x + player.width > obstacle.x &&
-                player.y < obstacle.y + obstacle.height &&
-                player.y + player.height > obstacle.y
-            ) {
-                gameOver = true;
-                ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+            // Movimenta o Obstáculo
+            obstaculo.y += obstaculo.velocidade;
+
+            // Se o obstáculo desviar e passar da tela
+            if (obstaculo.y > canvas.height) {
+                obstaculo.y = -80;
+                obstaculo.x = Math.random() * (canvas.width - obstaculo.largura);
+                pontos++;
+                obstaculo.velocidade += 0.4; // Aumenta a dificuldade
+                elementoPlacar.innerText = "Pontos: " + pontos;
+            }
+
+            // Desenha os elementos na tela
+            jogador.desenhar();
+            obstaculo.desenhar();
+
+            // Checa se bateu
+            if (verificarColisao(jogador, obstaculo)) {
+                fimDeJogo = true;
+                
+                // Tela de Game Over
+                ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "white";
-                ctx.font = "30px Arial";
+                
+                ctx.fillStyle = "#ff4444";
+                ctx.font = "bold 34px Arial";
                 ctx.textAlign = "center";
-                ctx.fillText("Fim de Jogo!", canvas.width / 2, canvas.height / 2);
-                ctx.font = "20px Arial";
-                ctx.fillText("Atualize a página para reiniciar", canvas.width / 2, canvas.height / 2 + 40);
+                ctx.fillText("FIM DE JOGO!", canvas.width / 2, canvas.height / 2 - 20);
+                
+                ctx.fillStyle = "#fff";
+                ctx.font = "18px Arial";
+                ctx.fillText("Pressione F5 para reiniciar", canvas.width / 2, canvas.height / 2 + 30);
             }
 
-            requestAnimationFrame(update);
+            // Chama o próximo frame
+            requestAnimationFrame(atualizarJogo);
         }
 
-        // Inicia o jogo
-        update();
+        // Inicia o ciclo do JavaScript
+        atualizarJogo();
     </script>
 </body>
 </html>

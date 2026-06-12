@@ -2,177 +2,159 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Jogo de Carro com JavaScript</title>
-    
-    <!-- ESTILO (CSS): Cuida das cores e posições na tela -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Sementes</title>
     <style>
         body {
-            margin: 0;
-            background-color: #1a1a1a;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: 'Arial', sans-serif;
-            color: #fff;
-            overflow: hidden;
+            min-height: 100vh;
+            margin: 0;
         }
-        #tela-jogo {
-            border: 4px solid #fff;
-            background-color: #333;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        .container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
         }
-        #placar {
-            position: absolute;
-            top: 20px;
-            font-size: 28px;
+        h2 {
+            color: #2e7d32;
+            text-align: center;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
-            text-shadow: 2px 2px #000;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #1b5e20;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            border-radius: 5px;
+            display: none;
+        }
+        .resultado p {
+            margin: 5px 0;
+            color: #1b5e20;
         }
     </style>
 </head>
 <body>
 
-    <div id="placar">Pontos: 0</div>
-    <canvas id="tela-jogo" width="400" height="500"></canvas>
+<div class="container">
+    <h2>Calculadora de Sementes</h2>
+    
+    <div class="form-group">
+        <label for="populacao">População Desejada (plantas/ha):</label>
+        <input type="number" id="populacao" value="300000" placeholder="Ex: 300000">
+    </div>
+    
+    <div class="form-group">
+        <label for="espacamento">Espaçamento entre Linhas (metros):</label>
+        <input type="number" id="espacamento" step="0.01" value="0.45" placeholder="Ex: 0.45">
+    </div>
+    
+    <div class="form-group">
+        <label for="pms">Peso de Mil Sementes - PMS (gramas):</label>
+        <input type="number" id="pms" value="180" placeholder="Ex: 180">
+    </div>
+    
+    <div class="form-group">
+        <label for="germinacao">Poder Germinativo / Pureza (%):</label>
+        <input type="number" id="germinacao" value="90" placeholder="Ex: 90">
+    </div>
+    
+    <div class="form-group">
+        <label for="area">Área Total do Plantio (hectares):</label>
+        <input type="number" id="area" value="10" placeholder="Ex: 10">
+    </div>
+    
+    <button onclick="calcularSementes()">Calcular Necessidade</button>
+    
+    <div class="resultado" id="blocoResultado">
+        <p><strong>Sementes por metro linear:</strong> <span id="resMetros">0</span> sementes/m</p>
+        <p><strong>Total de sementes necessárias:</strong> <span id="resTotalSementes">0</span> sementes</p>
+        <p><strong>Gasto de sementes por hectare:</strong> <span id="resKgHa">0</span> kg/ha</p>
+        <p><strong>Gasto total para a área:</strong> <span id="resTotalKg">0</span> kg</p>
+    </div>
+</div>
 
-    <!-- LÓGICA (JavaScript): Controla as regras, movimentos e o jogo -->
-    <script>
-        // 1. Configurações Iniciais da Tela
-        const canvas = document.getElementById("tela-jogo");
-        const ctx = canvas.getContext("2d");
-        const elementoPlacar = document.getElementById("placar");
+<script>
+function calcularSementes() {
+    // 1. Captura os valores digitados pelo usuário no DOM
+    const populacao = parseFloat(document.getElementById('populacao').value);
+    const espacamento = parseFloat(document.getElementById('espacamento').value);
+    const pms = parseFloat(document.getElementById('pms').value);
+    const germinacao = parseFloat(document.getElementById('germinacao').value) / 100;
+    const area = parseFloat(document.getElementById('area').value);
 
-        let pontos = 0;
-        let fimDeJogo = false;
+    // Validação simples para evitar divisão por zero ou campos vazios
+    if (!populacao || !espacamento || !pms || !germinacao || !area) {
+        alert("Por favor, preencha todos os campos corretamente.");
+        return;
+    }
 
-        // 2. Objeto do Jogador (Carro Azul)
-        const jogador = {
-            x: 175,
-            y: 410,
-            largura: 50,
-            altura: 80,
-            velocidade: 8,
-            desenhar() {
-                ctx.fillStyle = "#00aaff"; // Azul
-                ctx.fillRect(this.x, this.y, this.largura, this.altura);
-                
-                // Detalhes do carro (Rodas)
-                ctx.fillStyle = "#000";
-                ctx.fillRect(this.x - 5, this.y + 10, 5, 20);
-                ctx.fillRect(this.x + this.largura, this.y + 10, 5, 20);
-                ctx.fillRect(this.x - 5, this.y + 50, 5, 20);
-                ctx.fillRect(this.x + this.largura, this.y + 50, 5, 20);
-            }
-        };
+    // 2. Lógica dos Cálculos Agronômicos
+    // Ajusta a população desejada com base no Valor Cultural (germinação/pureza)
+    const sementesAjustadasHa = populacao / germinacao;
 
-        // 3. Objeto do Obstáculo (Carro Vermelho)
-        const obstaculo = {
-            x: Math.random() * (canvas.width - 50),
-            y: -80,
-            largura: 50,
-            altura: 80,
-            velocidade: 6,
-            desenhar() {
-                ctx.fillStyle = "#ff4444"; // Vermelho
-                ctx.fillRect(this.x, this.y, this.largura, this.altura);
-                
-                // Detalhes do obstáculo (Rodas)
-                ctx.fillStyle = "#000";
-                ctx.fillRect(this.x - 5, this.y + 10, 5, 20);
-                ctx.fillRect(this.x + this.largura, this.y + 10, 5, 20);
-                ctx.fillRect(this.x - 5, this.y + 50, 5, 20);
-                ctx.fillRect(this.x + this.largura, this.y + 50, 5, 20);
-            }
-        };
+    // Calcula quantos metros lineares de sulco existem em 1 hectare (10.000 m²)
+    const metrosLinearesPorHa = 10000 / espacamento;
 
-        // 4. Controle do Teclado (Eventos JavaScript)
-        const teclas = { SetaEsquerda: false, SetaDireita: false };
+    // Sementes necessárias por metro linear de sulco
+    const sementesPorMetro = sementesAjustadasHa / metrosLinearesPorHa;
 
-        document.addEventListener("keydown", (evento) => {
-            if (evento.key === "ArrowLeft") teclas.SetaEsquerda = true;
-            if (evento.key === "ArrowRight") teclas.SetaDireita = true;
-        });
+    // Total de sementes para a área inteira
+    const totalSementesArea = sementesAjustadasHa * area;
 
-        document.addEventListener("keyup", (evento) => {
-            if (evento.key === "ArrowLeft") teclas.SetaEsquerda = false;
-            if (evento.key === "ArrowRight") teclas.SetaDireita = false;
-        });
+    // Quilos de sementes por hectare (Regra de três usando o Peso de Mil Sementes)
+    const kgPorHa = (sementesAjustadasHa * pms) / 1000000;
 
-        // 5. Função de Colisão (Matemática no JavaScript)
-        function verificarColisao(obj1, obj2) {
-            return (
-                obj1.x < obj2.x + obj2.largura &&
-                obj1.x + obj1.largura > obj2.x &&
-                obj1.y < obj2.y + obj2.altura &&
-                obj1.y + obj1.altura > obj2.y
-            );
-        }
+    // Quilos totais para cobrir toda a propriedade
+    const kgTotalArea = kgPorHa * area;
 
-        // 6. Loop Principal do Jogo (Atualiza a tela 60 vezes por segundo)
-        function atualizarJogo() {
-            if (fimDeJogo) return;
+    // 3. Exibe os resultados formatados na tela
+    document.getElementById('resMetros').innerText = sementesPorMetro.toFixed(2);
+    document.getElementById('resTotalSementes').innerText = Math.round(totalSementesArea).toLocaleString('pt-BR');
+    document.getElementById('resKgHa').innerText = kgPorHa.toFixed(2);
+    document.getElementById('resTotalKg').innerText = kgTotalArea.toFixed(2);
 
-            // Limpa a tela anterior
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Torna o bloco de resultados visível
+    document.getElementById('blocoResultado').style.display = 'block';
+}
+</script>
 
-            // Desenha a sinalização da pista
-            ctx.strokeStyle = "#fff";
-            ctx.lineWidth = 6;
-            ctx.setLineDash([20, 20]);
-            ctx.beginPath();
-            ctx.moveTo(canvas.width / 2, 0);
-            ctx.lineTo(canvas.width / 2, canvas.height);
-            ctx.stroke();
-
-            // Movimenta o Jogador
-            if (teclas.SetaEsquerda && jogador.x > 0) {
-                jogador.x -= jogador.velocidade;
-            }
-            if (teclas.SetaDireita && jogador.x < canvas.width - jogador.largura) {
-                jogador.x += jogador.velocidade;
-            }
-
-            // Movimenta o Obstáculo
-            obstaculo.y += obstaculo.velocidade;
-
-            // Se o obstáculo desviar e passar da tela
-            if (obstaculo.y > canvas.height) {
-                obstaculo.y = -80;
-                obstaculo.x = Math.random() * (canvas.width - obstaculo.largura);
-                pontos++;
-                obstaculo.velocidade += 0.4; // Aumenta a dificuldade
-                elementoPlacar.innerText = "Pontos: " + pontos;
-            }
-
-            // Desenha os elementos na tela
-            jogador.desenhar();
-            obstaculo.desenhar();
-
-            // Checa se bateu
-            if (verificarColisao(jogador, obstaculo)) {
-                fimDeJogo = true;
-                
-                // Tela de Game Over
-                ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = "#ff4444";
-                ctx.font = "bold 34px Arial";
-                ctx.textAlign = "center";
-                ctx.fillText("FIM DE JOGO!", canvas.width / 2, canvas.height / 2 - 20);
-                
-                ctx.fillStyle = "#fff";
-                ctx.font = "18px Arial";
-                ctx.fillText("Pressione F5 para reiniciar", canvas.width / 2, canvas.height / 2 + 30);
-            }
-
-            // Chama o próximo frame
-            requestAnimationFrame(atualizarJogo);
-        }
-
-        // Inicia o ciclo do JavaScript
-        atualizarJogo();
-    </script>
 </body>
 </html>

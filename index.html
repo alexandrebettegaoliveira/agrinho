@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Agronegócio Moderno</title>
+    <title>Portal do Agronegócio Moderno e Inteligente</title>
     
     <!-- CSS Unificado -->
     <style>
@@ -69,9 +69,9 @@
             color: #52b788;
         }
 
-        /* Banner Principal */
+        /* Banner Principal com Carrossel */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://unsplash.com') no-repeat center center/cover;
+            position: relative;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -79,16 +79,50 @@
             text-align: center;
             color: #fff;
             padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
         }
 
         .hero-content h1 {
             font-size: 48px;
             margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero-content p {
             font-size: 20px;
             margin-bottom: 30px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         .btn {
@@ -182,6 +216,46 @@
             font-size: 36px;
             font-weight: bold;
             color: #2d6a4f;
+        }
+
+        /* Calculadora Agro */
+        .calc-box {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .calc-group {
+            margin-bottom: 15px;
+        }
+
+        .calc-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .calc-group input, .calc-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .calc-result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .calc-result p {
+            margin-bottom: 5px;
+            font-weight: 500;
         }
 
         /* Tabelas de Mercado */
@@ -284,17 +358,22 @@
                 <li><a href="#home">Início</a></li>
                 <li><a href="#tecnologia">Tecnologia</a></li>
                 <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+                <li><a href="#calculadora">Calculadora</a></li>
                 <li><a href="#mercado">Mercado</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Seção Banner Principal -->
+    <!-- Seção Banner Principal com Carrossel Automático -->
     <section id="home" class="hero">
+        <div class="slide active" style="background-image: url('https://unsplash.com');"></div>
+        <div class="slide" style="background-image: url('https://unsplash.com');"></div>
+        <div class="slide" style="background-image: url('https://unsplash.com');"></div>
+        
         <div class="hero-content">
-            <h1>O Futuro da Agricultura é Tecnológico</h1>
-            <p>Conectando inovação, produtividade e sustentabilidade no campo.</p>
+            <h1 id="heroTitle">O Futuro da Agricultura é Tecnológico</h1>
+            <p id="heroDesc">Conectando inovação, produtividade e sustentabilidade no campo.</p>
             <a href="#tecnologia" class="btn">Saiba Mais</a>
         </div>
     </section>
@@ -309,60 +388,7 @@
                 <p>Mapeamento térmico e monitoramento de pragas em tempo real direto do céu.</p>
             </div>
             <div class="card">
-                <h3>Maquinário Autônomo</h3>
-                <p>Tratores guiados por GPS que otimizam o plantio e reduzem o desperdício.</p>
             </div>
-            <div class="card">
-                <h3>Big Data & IA</h3>
-                <p>Análise de dados climáticos e do solo para tomadas de decisões precisas.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Sustentabilidade -->
-    <section id="sustentabilidade" class="section-bg section-padding">
-        <div class="two-column">
-            <div class="text-block">
-                <h2>Sustentabilidade Verde</h2>
-                <p>O agronegócio moderno foca na preservação dos recursos naturais. Práticas como o plantio direto, rotação de culturas e o uso de bioinsumos garantem a saúde do solo e reduzem a pegada de carbono, unindo lucro e respeito ao meio ambiente.</p>
-            </div>
-            <div class="stat-box">
-                <div class="stat-item">
-                    <span class="number" data-target="35">0</span><span>%</span>
-                    <p>Mais economia de água com irrigação inteligente.</p>
-                </div>
-                <div class="stat-item">
-                    <span class="number" data-target="50">0</span><span>%</span>
-                    <p>Redução no uso de defensivos químicos com bioinsumos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Cotações / Mercado -->
-    <section id="mercado" class="section-padding">
-        <h2>Painel do Mercado</h2>
-        <p class="subtitle">Confira as cotações simuladas das principais commodities brasileiras.</p>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Preço Base</th>
-                        <th>Variação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Soja (Saca 60kg)</td>
-                        <td>R$ 135,00</td>
-                        <td class="text-green">+1.2%</td>
-                    </tr>
-                    <tr>
-                        <td>Milho (Saca 60kg)</td>
-                    </tr>
-                </tbody>>
-            </table>
         </div>
     </section>
 </body>

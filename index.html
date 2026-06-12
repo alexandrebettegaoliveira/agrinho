@@ -3,381 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroTech - O Futuro do Agronegócio</title>
+    <title>AgroSustentável</title>
     <style>
-        /* --- ESTILOS GERAIS --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        /* ==========================================================================
+           ESTILOS (CSS)
+           ========================================================================== */
+        
+        /* Configurações Globais */
         :root {
-            --primary: #2d6a4f;
-            --secondary: #52b788;
-            --dark: #1b4332;
-            --light: #f4f9f4;
-            --text: #2d3748;
-            --bg-card: white;
-            --bg-navbar: white;
+            --bg-color: #f4f7f5;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --primary-color: #27ae60;
+            --accent-color: #2ecc71;
+            --btn-text: #ffffff;
+            --font-base-size: 16px;
         }
 
-        /* --- CLASSES DE ACESSIBILIDADE (ALTO CONTRASTE) --- */
+        /* Classe de Alto Contraste */
         body.high-contrast {
-            --primary: #ffff00;
-            --secondary: #00ffff;
-            --dark: #000000;
-            --light: #121212;
-            --text: #ffffff;
-            --bg-card: #1e1e1e;
-            --bg-navbar: #000000;
-            background-color: var(--light) !important;
-            color: var(--text) !important;
-        }
-
-        body.high-contrast header, 
-        body.high-contrast .card, 
-        body.high-contrast .calc-container, 
-        body.high-contrast .modal-box {
-            background-color: var(--bg-card) !important;
-            border: 2px solid #ffffff;
-        }
-
-        body.high-contrast .btn {
-            background-color: #000000 !important;
-            color: #ffff00 !important;
-            border: 2px solid #ffff00 !important;
-            font-weight: bold;
-        }
-
-        body.high-contrast .nav-menu a {
-            color: #ffffff !important;
-        }
-
-        body.high-contrast .nav-menu a:hover {
-            color: #ffff00 !important;
-        }
-
-        body.underline-links a {
-            text-decoration: underline !important;
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --card-bg: #121212;
+            --primary-color: #ffff00;
+            --accent-color: #ffff00;
+            --btn-text: #000000;
         }
 
         body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            font-size: var(--font-base-size);
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* --- NAVBAR --- */
-        header {
-            background-color: var(--bg-navbar);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
+        /* Barra de Acessibilidade */
+        .accessibility-bar {
+            background: #34495e;
+            padding: 10px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+            justify-content: flex-end;
+            gap: 10px;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-menu a:hover {
-            color: var(--primary);
-        }
-
-        /* --- HERO BANNER --- */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://unsplash.com') no-repeat center center/cover;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        .accessibility-bar button {
+            background: #2c3e50;
             color: white;
-            padding: 0 1rem;
-            margin-top: 60px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            background-color: var(--secondary);
-            color: white;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border: 1px solid #7f8c8d;
+            padding: 5px 10px;
             cursor: pointer;
-            text-decoration: none;
-            transition: background 0.3s;
+            border-radius: 4px;
         }
 
-        .btn:hover {
-            background-color: var(--primary);
-        }
-
-        /* --- SEÇÃO PILARES --- */
-        .sections {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
+        /* Cabeçalho */
+        header {
+            background-color: var(--primary-color);
+            color: var(--btn-text);
+            padding: 20px;
             text-align: center;
-            color: var(--dark);
-            margin-bottom: 3rem;
-            font-size: 2rem;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        header nav a {
+            color: var(--btn-text);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Layout */
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
         .card {
-            background: var(--bg-card);
-            padding: 2rem;
+            background-color: var(--card-bg);
+            border: 2px solid var(--primary-color);
             border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .clickable-card {
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .clickable-card:hover {
-            border-color: var(--secondary);
-            box-shadow: 0 6px 15px rgba(82, 183, 136, 0.2);
-        }
-
-        .click-hint {
-            display: block;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--secondary);
-            font-weight: bold;
-        }
-
-        /* --- JANELA MODAL --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-box {
-            background-color: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 12px;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            position: relative;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.active .modal-box {
-            transform: translateY(0);
-        }
-
-        .modal-box h2 {
-            color: var(--dark);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .modal-box ul {
-            margin: 1.5rem 0;
-            padding-left: 1.2rem;
-        }
-
-        .modal-box li {
-            margin-bottom: 0.8rem;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            color: #a0aec0;
-            cursor: pointer;
-        }
-
-        /* --- CALCULADORA INTERATIVA --- */
-        .calc-container {
-            background-color: var(--bg-card);
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
+        /* Formulários e Botões */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 15px;
         }
 
-        .form-group label {
+        label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 5px;
-            background-color: var(--bg-card);
-            color: var(--text);
-        }
-
-        .result {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: var(--light);
-            border-left: 5px solid var(--primary);
+            margin-bottom: 5px;
             font-weight: bold;
-            display: none;
         }
 
-        /* --- COMPONENTE: MENU DE ACESSIBILIDADE --- */
-        .accessibility-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 3000;
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
-        .accessibility-btn {
-            background-color: #1e3a8a;
-            color: white;
+        button {
+            background-color: var(--primary-color);
+            color: var(--btn-text);
             border: none;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            font-size: 1.5rem;
+            padding: 10px 20px;
+            font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.2s;
+            border-radius: 4px;
+            font-weight: bold;
         }
 
-        .accessibility-btn:hover {
-            transform: scale(1.1);
+        button:hover {
+            background-color: var(--accent-color);
         }
 
-        .accessibility-menu {
-            position: absolute;
-            bottom: 65px;
-            right: 0;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            width: 230px;
-            padding: 1rem;
-            display: none;
-            flex-direction: column;
-            gap: 0.5rem;
-            border: 1px solid #e2e8f0;
+        /* Resultado */
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            font-weight: bold;
+            border-left: 5px solid var(--primary-color);
         }
+    </style>
+</head>
+<body>
 
-        .accessibility-menu.open {
-            display: flex;
+    <!-- Menu de Acessibilidade -->
+    <div class="accessibility-bar" role="complementary" aria-label="Ferramentas de Acessibilidade">
+        <button id="alt-contrast" aria-label="Alternar Alto Contraste">🌓 Alto Contraste</button>
+        <button id="increase-font" aria-label="Aumentar Fonte">A+</button>
+        <button id="decrease-font" aria-label="Diminuir Fonte">A-</button>
+    </div>
+
+    <!-- Cabeçalho -->
+    <header>
+        <h1>AgroSustentável</h1>
+        <nav>
+            <a href="#sustentabilidade">Sustentabilidade</a>
+            <a href="#calculadora">Calculadora de Sementes</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seção Sustentabilidade -->
+        <section id="sustentabilidade" class="card">
+            <h2>Sustentabilidade no Campo</h2>
+            <p>O futuro do agronegócio depende de práticas conscientes. A rotação de culturas, o uso de bioinsumos e a gestão eficiente da água protegem o solo e garantem a produtividade para as próximas gerações.</p>
+            <ul>
+                <li>Preservação de recursos hídricos</li>
+                <li>Redução da pegada de carbono</li>
+                <li>Fortalecimento da biodiversidade</li>
+            </ul>
+        </section>
+
+        <!-- Seção Calculadora -->
+        <section id="calculadora" class="card">
+            <h2>Calculadora de Sementes</h2>
+            <p>Calcule a quantidade necessária de sementes por hectare para o seu plantio.</p>
+            
+            <form id="seed-form" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label for="area">Área do Plantio (Hectares):</label>
+                    <input type="number" id="area" min="1" step="any" required placeholder="Ex: 10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="density">Densidade Desejada (Plantas por metro linear):</label>
+                    <input type="number" id="density" min="1" step="any" required placeholder="Ex: 12">
+                </div>
+
+                <div class="form-group">
+                    <label for="spacing">Espaçamento entre Linhas (Metros):</label>
+                    <input type="number" id="spacing" min="0.1" step="any" required placeholder="Ex: 0.45">
+                </div>
+
+                <button type="button" onclick="calcularSementes()">Calcular Total</button>
+            </form>
+
+            <div id="resultado" class="result-box" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <!-- ==========================================================================
+       LÓGICA (JAVASCRIPT)
+       ========================================================================== -->
+    <script>
+        // Controle de Acessibilidade
+        const btnContrast = document.getElementById('alt-contrast');
+        const btnIncrease = document.getElementById('increase-font');
+        const btnDecrease = document.getElementById('decrease-font');
+        let fontSizePercent = 100;
+
+        // Alternar Alto Contraste
+        btnContrast.addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+        });
+
+        // Aumentar Fonte
+        btnIncrease.addEventListener('click', () => {
+            if (fontSizePercent < 150) {
+                fontSizePercent += 10;
+                document.documentElement.style.fontSize = `${fontSizePercent}%`;
+            }
+        });
+
+        // Diminuir Fonte
+        btnDecrease.addEventListener('click', () => {
+            if (fontSizePercent > 80) {
+                fontSizePercent -= 10;
+                document.documentElement.style.fontSize = `${fontSizePercent}%`;
+            }
+        });
+
+        // Calculadora de Sementes
+        function calcularSementes() {
+            const area = parseFloat(document.getElementById('area').value);
+            const densidade = parseFloat(document.getElementById('density').value);
+            const espacamento = parseFloat(document.getElementById('spacing').value);
+            const resultadoDiv = document.getElementById('resultado');
+
+            if (!area || !densidade || !espacamento) {
+                resultadoDiv.innerHTML = "Por favor, preencha todos os campos corretamente.";
+                return;
+            }
+
+            // Lógica do cálculo: 
+            // Metros lineares por hectare = 10.000 / espaçamento
+            // Sementes por hectare = metros lineares * densidade
+            // Total = Sementes por hectare * área total
+            const metrosLinearesPorHectare = 10000 / espacamento;
+            const sementesPorHectare = metrosLinearesPorHectare * densidade;
+            const sementesTotal = sementesPorHectare * area;
+
+            resultadoDiv.innerHTML = `
+                <p>Sementes por hectare: ${Math.round(sementesPorHectare).toLocaleString('pt-BR')}</p>
+                <p>Total de sementes necessárias: ${Math.round(sementesTotal).toLocaleString('pt-BR')} sementes</p>
+            `;
         }
-
-        .accessibility-menu button {
-            background-color: #f1f5f9;
-            color: #1e293b;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 5px;
-            text-align: left;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .accessibility-menu button:hover {
-            background-color: #cbd5e1;
-        }
-
-        /* --- FOOTER --- */
+    </script>
+</body>
+</html>

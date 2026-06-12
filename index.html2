@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,6 @@
             background-color: #f4f7f5;
             color: #333;
             line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
@@ -32,7 +31,6 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         header .logo {
@@ -49,17 +47,16 @@
             text-decoration: none;
             margin-left: 20px;
             font-weight: 500;
-            transition: color 0.2s;
         }
 
         nav a:hover {
             color: #52b788;
         }
 
+        /* Fundo em degradê verde/terra para funcionar 100% offline */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://unsplash.com') no-repeat center center/cover;
-            height: 60vh;
+            background: linear-gradient(135deg, #1b4332 0%, #40916c 100%);
+            height: 50vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -86,9 +83,8 @@
             border-radius: 5px;
             font-weight: bold;
             display: inline-block;
-            border: none;
             cursor: pointer;
-            transition: background-color 0.2s;
+            border: none;
         }
 
         .btn:hover {
@@ -100,12 +96,13 @@
             text-align: center;
         }
 
-        /* Grid de recursos responsivo */
+        /* Grid moderno para as caixas de recursos */
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            justify-content: space-between;
             gap: 20px;
             background-color: #e9f5ed;
+            flex-wrap: wrap;
         }
 
         .card {
@@ -113,6 +110,8 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 250px;
             text-align: left;
         }
 
@@ -121,81 +120,61 @@
             margin-bottom: 15px;
         }
 
-        /* Seção de Cotações */
-        .cotacoes-table {
+        /* Nova Tabela de Cotações */
+        .tabela-mercado {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin: 20px 0;
             background: white;
-            border-radius: 8px;
-            overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .cotacoes-table th, .cotacoes-table td {
-            padding: 15px;
+        .tabela-mercado th, .tabela-mercado td {
+            padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
-        .cotacoes-table th {
+        .tabela-mercado th {
             background-color: #1b4332;
             color: white;
         }
 
-        .alta { color: #2d6a4f; font-weight: bold; }
-        .baixa { color: #b7094c; font-weight: bold; }
-
-        /* Ferramenta Interativa */
+        /* Novo Simulador de Safra */
         .simulador-box {
             background: white;
             padding: 30px;
             border-radius: 8px;
             max-width: 500px;
-            margin: 20px auto 0;
+            margin: 20px auto;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             text-align: left;
         }
 
-        .form-group {
+        .campo-grupo {
             margin-bottom: 15px;
         }
 
-        .form-group label {
+        .campo-grupo label {
             display: block;
             margin-bottom: 5px;
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        .form-group input, .form-group select {
+        .campo-grupo input, .campo-grupo select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .resultado {
+        .resultado-painel {
             margin-top: 20px;
             padding: 15px;
-            background-color: #e9f5ed;
+            background-color: #d8f3dc;
             border-left: 5px solid #52b788;
-            border-radius: 4px;
             font-weight: bold;
-        }
-
-        /* Formulário de Contato */
-        .contato-form {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .contato-form input, .contato-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            display: none;
         }
 
         footer {
@@ -206,55 +185,27 @@
             font-size: 14px;
         }
 
-        /* Painel de acessibilidade lateral */
-        .acessibilidade-panel {
+        /* ♿ BOTÃO DE ACESSIBILIDADE FIXADO NO CANTO INFERIOR DIREITO */
+        .btn-acessibilidade {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 9999;
-        }
-
-        .btn-acessibilidade {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background-color: #028090;
             color: white;
             border: none;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 28px;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.2s;
         }
 
-        .btn-acessibilidade:hover {
-            transform: scale(1.1);
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-            }
-            nav {
-                margin-top: 15px;
-            }
-            nav a {
-                margin: 0 10px;
-            }
-            .hero h1 {
-                font-size: 32px;
-            }
-        }
-
-        /* 🌓 ALTO CONTRASTE */
+        /* 🌓 CLASSE DE ALTO CONTRASTE ATIVADA PELO JAVASCRIPT */
         body.alto-contraste {
             background-color: #000 !important;
             color: #fff !important;
@@ -263,17 +214,14 @@
         body.alto-contraste header, 
         body.alto-contraste footer,
         body.alto-contraste .card,
-        body.alto-contraste .simulador-box,
-        body.alto-contraste .cotacoes-table {
+        body.alto-contraste .simulador-box {
             background-color: #111 !important;
             border: 1px solid #fff;
             color: #fff !important;
         }
 
         body.alto-contraste nav a,
-        body.alto-contraste .card h3,
-        body.alto-contraste th,
-        body.alto-contraste label {
+        body.alto-contraste .card h3 {
             color: #ff0 !important;
         }
 
@@ -281,16 +229,6 @@
             background-color: #ff0 !important;
             color: #000 !important;
         }
-
-        body.alto-contraste .alta, body.alto-contraste .baixa {
-            color: #fff !important;
-            text-decoration: underline;
-        }
-
-        /* 🔎 CLASSES DE FONTE */
-        body.fonte-grande { font-size: 20px; }
-        body.fonte-grande .hero h1 { font-size: 52px; }
-        body.fonte-grande nav a { font-size: 22px; }
     </style>
 </head>
 <body>
@@ -301,55 +239,97 @@
         <nav>
             <a href="#inicio">Início</a>
             <a href="#sobre">Sobre</a>
-            <a href="#tecnologia">Tecnologia</a>
             <a href="#mercado">Mercado</a>
             <a href="#simulador">Simulador</a>
-            <a href="#contato">Contato</a>
         </nav>
     </header>
 
     <section id="inicio" class="hero">
         <div class="hero-content">
             <h1>Inovação e Sustentabilidade no Campo</h1>
-            <p>Conectando tecnologia de ponta com a produção agrícola global.</p>
-            <a href="#tecnologia" class="btn">Conhecer Soluções</a>
+            <p>Conectando tecnologia de ponta com a produção agrícola de precisão.</p>
+            <a href="#simulador" class="btn">Abrir Ferramentas</a>
         </div>
     </section>
 
     <section id="sobre" class="container">
         <h2>Quem Somos</h2>
-        <p>Somos líderes na transformação digital do agronegócio, desenvolvendo ecossistemas inteligentes que aumentam a previsibilidade e rentabilidade da lavoura.</p>
+        <p>Somos líderes na transformação digital do agronegócio, desenvolvendo soluções inteligentes que aumentam a produtividade e a saúde da lavoura.</p>
     </section>
 
-    <section id="tecnologia" class="features container">
+    <section class="features container">
         <div class="card">
             <h3>Drones e Mapeamento</h3>
-            <p>Monitoramento aéreo detalhado da saúde da lavoura com relatórios semanais gerados por Inteligência Artificial.</p>
+            <p>Monitoramento aéreo detalhado da saúde da lavoura em tempo real.</p>
         </div>
         <div class="card">
             <h3>Gestão de Solo</h3>
-            <p>Sensores conectados de IoT realizam a leitura de umidade e nutrientes para otimização da irrigação.</p>
+            <p>Análise automatizada de dados climáticos e sensores para irrigação precisa.</p>
         </div>
         <div class="card">
-            <h3>Automação de Maquinário</h3>
-            <p>Integração de telemetria avançada para frotas de tratores e colheitadeiras autônomas.</p>
+            <h3>Previsão Preditiva</h3>
+            <p>Algoritmos avançados que calculam as melhores janelas climáticas para colheita.</p>
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: MERCADO -->
+    <!-- NOVA SEÇÃO: COTAÇÕES DO MERCADO -->
     <section id="mercado" class="container">
-        <h2>Mercado e Commodities</h2>
-        <p>Acompanhe o fechamento diário das principais cotações do setor agropecuário nacional.</p>
-        <table class="cotacoes-table">
+        <h2>Painel de Commodities</h2>
+        <p>Preços médios atuais praticados no mercado agrícola nacional.</p>
+        <table class="tabela-mercado">
             <thead>
                 <tr>
-                    <th>Produto</th>
+                    <th>Cultura</th>
                     <th>Preço Base</th>
-                    <th>Variação</th>
+                    <th>Tendência</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Soja (Saca 60kg)</td>
-                    <td>R$ 136,50</td>
-</html>
+                    <td>R$ 138,50</td>
+                    <td style="color: green; font-weight: bold;">Alta ▲</td>
+                </tr>
+                <tr>
+                    <td>Milho (Saca 60kg)</td>
+                    <td>R$ 62,10</td>
+                    <td style="color: red; font-weight: bold;">Baixa ▼</td>
+                </tr>
+                <tr>
+                    <td>Trigo (Tonelada)</td>
+                    <td>R$ 1.250,00</td>
+                    <td style="color: green; font-weight: bold;">Alta ▲</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- NOVA SEÇÃO: SIMULADOR OPERACIONAL -->
+    <section id="simulador" class="container" style="background-color: #e9f5ed;">
+        <h2>Simulador de Produtividade</h2>
+        <p>Preencha os dados da sua área para projetar os volumes da colheita.</p>
+        
+        <div class="simulador-box">
+            <div class="campo-grupo">
+                <label for="tipoCultura">Escolha o Cultivo:</label>
+                <select id="tipoCultura">
+                    <option value="soja">Soja (Média: 60 sacas/ha)</option>
+                    <option value="milho">Milho (Média: 100 sacas/ha)</option>
+                </select>
+            </div>
+            <div class="campo-grupo">
+                <label for="campoHectares">Área de Plantio (Hectares):</label>
+                <input type="number" id="campoHectares" placeholder="Ex: 50" min="1">
+            </div>
+            <!-- Chamei a função JavaScript inline usando onclick para eliminar falhas de escopo -->
+            <button class="btn" style="width: 100%;" onclick="executarCalculoSafra()">Calcular Safra</button>
+            
+            <div id="blocoResultado" class="resultado-painel"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AgroTech. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- O BOTÃO FLUTUANTE -->

@@ -3,53 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Agronegócio Inteligente & Conectado</title>
+    <title>Portal do Agronegócio</title>
     
-    <!-- Biblioteca Chart.js para o Gráfico Dinâmico -->
-    <script src="https://jsdelivr.net"></script>
-
-    <!-- CSS Unificado -->
     <style>
-        /* Reset Geral */
+        /* ==========================================================================
+           1. ESTILOS DO CSS (STYLE)
+           ========================================================================== */
+        
+        /* Configurações Globais e Variáveis de Cores Padrão */
+        :root {
+            --bg-principal: #f4f7f5;
+            --bg-card: #ffffff;
+            --cor-texto: #333333;
+            --cor-primaria: #2e7d32; /* Verde Agro */
+            --cor-secundaria: #155724;
+            --cor-link: #ffffff;
+        }
+
+        /* Classe de Alto Contraste (Acessibilidade) */
+        .alto-contraste {
+            --bg-principal: #000000;
+            --bg-card: #1c1c1c;
+            --cor-texto: #ffffff;
+            --cor-primaria: #ffff00; /* Amarelo acessível sobre preto */
+            --cor-secundaria: #ffff00;
+            --cor-link: #ffff00;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            color: #333;
-            line-height: 1.6;
-            background-color: #fcfcfc;
+            background-color: var(--bg-principal);
+            color: var(--cor-texto);
+            transition: background 0.3s, color 0.3s;
+            padding-bottom: 60px; /* Evita que o rodapé fixo cubra conteúdo */
         }
 
-        /* Navegação */
-        header {
-            background-color: #1b4332;
+        /* Barra de Acessibilidade */
+        .acessibilidade-container {
+            background-color: #222;
+            padding: 8px 20px;
+            text-align: right;
+        }
+
+        #btn-contraste {
+            background-color: #444;
             color: #fff;
-            padding: 20px 10%;
+            border: 1px solid #fff;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        #btn-contraste:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Cabeçalho e Navegação */
+        header {
+            background-color: var(--cor-primaria);
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: bold;
         }
 
         .logo span {
-            color: #52b788;
+            color: #a3e2a5;
         }
 
         nav ul {
@@ -62,337 +96,211 @@
         }
 
         nav ul li a {
-            color: #fff;
+            color: var(--cor-link);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-weight: bold;
         }
 
         nav ul li a:hover {
-            color: #52b788;
+            text-decoration: underline;
         }
 
-        /* Banner Principal com Carrossel */
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            z-index: 1;
-        }
-
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.55);
-        }
-
-        .slide.active {
-            opacity: 1;
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
+        /* Controle de Exibição das Páginas */
+        .pagina {
+            display: none;
             max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .hero-content h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        .pagina.ativa {
+            display: block;
         }
 
-        .hero-content p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        .pagina h2 {
+            margin-bottom: 15px;
+            color: var(--cor-primaria);
         }
 
-        .btn {
-            background-color: #52b788;
-            color: #fff;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
+        .pagina p {
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
-        .btn:hover {
-            background-color: #40916c;
+        .pagina ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
         }
 
-        /* Estrutura de Seções */
-        .section-padding {
-            padding: 80px 10%;
-        }
-
-        .section-bg {
-            background-color: #f4f9f4;
-        }
-
-        h2 {
-            font-size: 32px;
-            text-align: center;
-            color: #1b4332;
+        .pagina li {
             margin-bottom: 10px;
         }
 
-        .subtitle {
+        /* Estilo Customizado para a Home */
+        .hero {
             text-align: center;
-            color: #666;
-            margin-bottom: 40px;
+            padding: 40px 20px;
         }
 
-        /* Grid de Cards */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--cor-primaria);
         }
-
-        .card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #52b788;
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            color: #2d6a4f;
-        }
-
-        /* Seção de Notícias */
-        .news-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
-
-        /* Layout Duas Colunas (Sustentabilidade) */
-        .two-column {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .text-block {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .stat-box {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            gap: 20px;
-        }
-
-        .stat-item {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            flex: 1;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .stat-item .number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #2d6a4f;
-        }
-
-        /* Calculadora Agro */
-        .calc-box {
-            max-width: 500px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .calc-group {
-            margin-bottom: 15px;
-        }
-
-        .calc-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .calc-group input, .calc-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .calc-result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e8f5e9;
-            border-radius: 4px;
-            display: none;
-        }
-
-        /* Painel do Mercado e Gráficos */
-        .market-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-
-        .market-table, .market-chart {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #2d6a4f;
-            color: #fff;
-        }
-
-        .text-green { color: #2b9348; font-weight: bold; }
-        .text-red { color: #d90429; font-weight: bold; }
 
         /* Formulário de Contato */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
+        label {
             margin-bottom: 5px;
             font-weight: bold;
         }
 
-        .form-group input, .form-group textarea {
-            width: 100%;
+        input, textarea {
+            margin-bottom: 15px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            background-color: var(--bg-card);
+            color: var(--cor-texto);
         }
 
-        #formFeedback {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
+        .btn-enviar {
+            background-color: var(--cor-primaria);
+            color: white;
+            padding: 12px;
+            border: none;
             border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
             font-weight: bold;
         }
-
-        .success { background-color: #d8f3dc; color: #1b4332; }
-        .error { background-color: #f8d7da; color: #721c24; }
-        .hidden { display: none; }
 
         /* Rodapé */
         footer {
-            background-color: #1b4332;
-            color: #fff;
             text-align: center;
             padding: 20px;
-            font-size: 14px;
-        }
-
-        /* Responsividade Mobile */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-            }
-            nav ul {
-                margin-top: 15px;
-            }
-            .hero-content h1 {
-                font-size: 32px;
-            }
-            .section-padding {
-                padding: 60px 5%;
-            }
+            background-color: #222;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <!-- Cabeçalho e Navegação -->
+    <!-- ==========================================================================
+       2. ESTRUTURA DO HTML
+       ========================================================================== -->
+
+    <!-- Botão de Acessibilidade -->
+    <div class="acessibilidade-container">
+        <button id="btn-contraste" aria-label="Alternar alto contraste" title="Alto Contraste">👁️ Alto Contraste</button>
+    </div>
+
+    <!-- Cabeçalho -->
     <header>
         <div class="logo">Agro<span>Futuro</span></div>
         <nav>
             <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#tecnologia">Tecnologia</a></li>
-                <li><a href="#noticias">Notícias</a></li>
-                <li><a href="#sustentabilidade">Sustentabilidade</a></li>
-                <li><a href="#calculadora">Calculadora</a></li>
-                <li><a href="#mercado">Mercado</a></li>
-                <li><a href="#contato">Contato</a></li>
+                <li><a href="#" onclick="mudarPagina('home')">Home</a></li>
+                <li><a href="#" onclick="mudarPagina('sobre')">Sobre o Agro</a></li>
+                <li><a href="#" onclick="mudarPagina('tecnologia')">Tecnologia</a></li>
+                <li><a href="#" onclick="mudarPagina('contato')">Contato</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Seção Banner Principal com Carrossel Automático -->
-    <section id="home" class="hero">
-        <div class="slide active" style="background-image: url('https://unsplash.com');"></div>
-        <div class="slide" style="background-image: url('https://unsplash.com');"></div>
-        <div class="slide" style="background-image: url('https://unsplash.com');"></div>
+    <!-- Conteúdo das Páginas -->
+    <main id="conteudo-principal">
         
-        <div class="hero-content">
-            <h1 id="heroTitle">O Futuro da Agricultura é Tecnológico</h1>
-            <p id="heroDesc">Conectando inovação, produtividade e sustentabilidade no campo.</p>
-            <a href="#tecnologia" class="btn">Saiba Mais</a>
-        </div>
-    </section>
+        <!-- Seção: Home -->
+        <section id="home" class="pagina ativa">
+            <div class="hero">
+                <h1>O Futuro do Agronegócio</h1>
+                <p>Alimentando o mundo através da inovação, sustentabilidade e tecnologia de ponta.</p>
+            </div>
+        </section>
 
-    <!-- Seção de Tecnologia -->
-    <section id="tecnologia" class="section-padding">
-    </section>
+        <!-- Seção: Sobre -->
+        <section id="sobre" class="pagina">
+            <h2>Sobre o Agronegócio</h2>
+            <p>O agronegócio é um dos pilares econômicos mais vitais do mundo. Ele engloba desde a produção no campo e fabricação de insumos até a distribuição de alimentos globalmente.</p>
+            <p>Atualmente, o principal desafio do setor é aumentar a produtividade e garantir a segurança alimentar mundial, reduzindo os impactos ambientais através de práticas sustentáveis.</p>
+        </section>
+
+        <!-- Seção: Tecnologia -->
+        <section id="tecnologia" class="pagina">
+            <h2>Tecnologia no Campo</h2>
+            <p>A transformação digital modernizou o ambiente rural. Confira os principais recursos em alta:</p>
+            <ul>
+                <li><strong>Drones:</strong> Utilizados para mapeamento de áreas, monitoramento de saúde da plantação e pulverização precisa.</li>
+                <li><strong>Maquinário Inteligente:</strong> Tratores e colheitadeiras autônomas que operam via GPS e evitam o desperdício de combustível.</li>
+                <li><strong>Sensores de Solo:</strong> Dispositivos IoT que avaliam em tempo real a umidade, temperatura e necessidade de nutrientes da terra.</li>
+            </ul>
+        </section>
+
+        <!-- Seção: Contato -->
+        <section id="contato" class="pagina">
+            <h2>Fale Conosco</h2>
+            <p>Dúvidas, sugestões ou propostas de parcerias comerciais? Preencha o formulário abaixo.</p>
+            <form onsubmit="event.preventDefault(); alert('Sua mensagem foi simulada com sucesso!');">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" required placeholder="Digite seu nome completo">
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required placeholder="exemplo@email.com">
+
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" rows="4" required placeholder="Como podemos te ajudar?"></textarea>
+
+                <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 AgroFuturo. Cultivando um amanhã melhor.</p>
+    </footer>
+
+    <!-- ==========================================================================
+       3. LÓGICA DO JAVASCRIPT (SCRIPT)
+       ========================================================================== -->
+    <script>
+        // Lógica de Navegação (Mudar de Página)
+        function mudarPagina(idPagina) {
+            // Busca todas as seções do site
+            const paginas = document.querySelectorAll('.pagina');
+            
+            // Oculta todas as páginas removendo a classe 'ativa'
+            paginas.forEach(pagina => {
+                pagina.classList.remove('ativa');
+            });
+
+            // Mostra apenas a página selecionada adicionando a classe 'ativa'
+            const paginaAlvo = document.getElementById(idPagina);
+            if (paginaAlvo) {
+                paginaAlvo.classList.add('ativa');
+            }
+        }
+
+        // Lógica do Botão de Acessibilidade (Alto Contraste)
+        const btnContraste = document.getElementById('btn-contraste');
+
+        btnContraste.addEventListener('click', () => {
+            // Liga/Desliga a classe de contraste no elemento principal <body>
+            document.body.classList.toggle('alto-contraste');
+        });
+    </script>
 </body>
 </html>

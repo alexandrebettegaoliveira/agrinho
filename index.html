@@ -19,17 +19,60 @@
             --dark: #1b4332;
             --light: #f4f9f4;
             --text: #2d3748;
+            --bg-card: white;
+            --bg-navbar: white;
+        }
+
+        /* --- CLASSES DE ACESSIBILIDADE (ALTO CONTRASTE) --- */
+        body.high-contrast {
+            --primary: #ffff00;
+            --secondary: #00ffff;
+            --dark: #000000;
+            --light: #121212;
+            --text: #ffffff;
+            --bg-card: #1e1e1e;
+            --bg-navbar: #000000;
+            background-color: var(--light) !important;
+            color: var(--text) !important;
+        }
+
+        body.high-contrast header, 
+        body.high-contrast .card, 
+        body.high-contrast .calc-container, 
+        body.high-contrast .modal-box {
+            background-color: var(--bg-card) !important;
+            border: 2px solid #ffffff;
+        }
+
+        body.high-contrast .btn {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+            border: 2px solid #ffff00 !important;
+            font-weight: bold;
+        }
+
+        body.high-contrast .nav-menu a {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .nav-menu a:hover {
+            color: #ffff00 !important;
+        }
+
+        body.underline-links a {
+            text-decoration: underline !important;
         }
 
         body {
             background-color: var(--light);
             color: var(--text);
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* --- NAVBAR --- */
         header {
-            background-color: white;
+            background-color: var(--bg-navbar);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
@@ -132,7 +175,7 @@
         }
 
         .card {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -148,7 +191,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Estilo específico para o card clicável de sustentabilidade */
         .clickable-card {
             cursor: pointer;
             border: 2px solid transparent;
@@ -167,7 +209,7 @@
             font-weight: bold;
         }
 
-        /* --- JANELA MODAL (SUSTENTABILIDADE) --- */
+        /* --- JANELA MODAL --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -190,7 +232,7 @@
         }
 
         .modal-box {
-            background-color: white;
+            background-color: var(--bg-card);
             padding: 2.5rem;
             border-radius: 12px;
             max-width: 600px;
@@ -231,16 +273,11 @@
             border: none;
             color: #a0aec0;
             cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .close-modal:hover {
-            color: #4a5568;
         }
 
         /* --- CALCULADORA INTERATIVA --- */
         .calc-container {
-            background-color: white;
+            background-color: var(--bg-card);
             max-width: 600px;
             margin: 0 auto;
             padding: 2rem;
@@ -263,6 +300,8 @@
             padding: 0.8rem;
             border: 1px solid #cbd5e1;
             border-radius: 5px;
+            background-color: var(--bg-card);
+            color: var(--text);
         }
 
         .result {
@@ -274,74 +313,71 @@
             display: none;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--dark);
+        /* --- COMPONENTE: MENU DE ACESSIBILIDADE --- */
+        .accessibility-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 3000;
+        }
+
+        .accessibility-btn {
+            background-color: #1e3a8a;
             color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
         }
 
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .hero h1 { font-size: 2rem; }
+        .accessibility-btn:hover {
+            transform: scale(1.1);
         }
-    </style>
-</head>
-<body>
 
-    <!-- NAVBAR -->
-    <header>
-        <nav class="nav-container">
-            <div class="logo">🌱 AgroTech</div>
-            <ul class="nav-menu">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#pilares">Inovação</a></li>
-                <li><a href="#calculadora">Simulador</a></li>
-            </ul>
-        </nav>
-    </header>
+        .accessibility-menu {
+            position: absolute;
+            bottom: 65px;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 230px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
 
-    <!-- HERO BANNER -->
-    <section class="hero" id="inicio">
-        <h1>O Futuro do Agronegócio é Sustentável</h1>
-        <p>Unindo tecnologia de ponta, produtividade e respeito ao meio ambiente para alimentar o mundo.</p>
-        <a href="#calculadora" class="btn">Simular Produtividade</a>
-    </section>
+        .accessibility-menu.open {
+            display: flex;
+        }
 
-    <!-- PILARES DO AGRO -->
-    <section class="sections" id="pilares">
-        <h2 class="section-title">Inovação no Campo</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>🚜 Agricultura de Precisão</h3>
-                <p>Uso de sensores, IoT e GPS para aplicar insumos no local correto e na quantidade exata, reduzindo custos e desperdícios.</p>
-            </div>
-            <div class="card">
-                <h3>📊 Gestão de Dados</h3>
-                <p>Softwares analíticos que ajudam o produtor a prever pragas, analisar o solo e tomar decisões baseadas em dados reais.</p>
-            </div>
-            <!-- CARD MODIFICADO (CLICÁVEL) -->
-            <div class="card clickable-card" onclick="abrirModalSustentabilidade()">
-                <h3>💧 Sustentabilidade</h3>
-                <p>Técnicas modernas de manejo de água, rotação de culturas e bioinsumos que preservam os recursos naturais do planeta.</p>
-                <span class="click-hint">Clique para saber mais →</span>
-            </div>
-        </div>
-    </section>
+        .accessibility-menu button {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    <!-- JANELA MODAL (CONTEÚDO COMPLEMENTAR) -->
-    <div class="modal-overlay" id="modalSustentabilidade" onclick="fecharModalSustentabilidade(event)">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <button class="close-modal" onclick="fecharModalSustentabilidade(event)">&times;</button>
-            <h2>🌱 Pilares da Sustentabilidade no Agro</h2>
-            <p>A produção moderna utiliza a tecnologia para produzir mais utilizando menos recursos naturais. Conheça as principais práticas:</p>
-            <ul>
-                <li><strong>Plantio Direto:</strong> Cultivo sobre a palha da safra anterior. Protege o solo contra a erosão e mantém a umidade da terra.</li>
-            </ul>
-        </div>
-    </div>
-</body>
-</html>
+        .accessibility-menu button:hover {
+            background-color: #cbd5e1;
+        }
+
+        /* --- FOOTER --- */

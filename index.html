@@ -136,7 +136,7 @@
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
@@ -146,6 +146,96 @@
         .card h3 {
             color: var(--primary);
             margin-bottom: 1rem;
+        }
+
+        /* Estilo específico para o card clicável de sustentabilidade */
+        .clickable-card {
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .clickable-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 6px 15px rgba(82, 183, 136, 0.2);
+        }
+
+        .click-hint {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* --- JANELA MODAL (SUSTENTABILIDADE) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-box h2 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-box ul {
+            margin: 1.5rem 0;
+            padding-left: 1.2rem;
+        }
+
+        .modal-box li {
+            margin-bottom: 0.8rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #4a5568;
         }
 
         /* --- CALCULADORA INTERATIVA --- */
@@ -233,60 +323,25 @@
                 <h3>📊 Gestão de Dados</h3>
                 <p>Softwares analíticos que ajudam o produtor a prever pragas, analisar o solo e tomar decisões baseadas em dados reais.</p>
             </div>
-            <div class="card">
+            <!-- CARD MODIFICADO (CLICÁVEL) -->
+            <div class="card clickable-card" onclick="abrirModalSustentabilidade()">
                 <h3>💧 Sustentabilidade</h3>
                 <p>Técnicas modernas de manejo de água, rotação de culturas e bioinsumos que preservam os recursos naturais do planeta.</p>
+                <span class="click-hint">Clique para saber mais →</span>
             </div>
         </div>
     </section>
 
-    <!-- SIMULADOR INTERATIVO -->
-    <section class="sections" id="calculadora">
-        <h2 class="section-title">Simulador de Estimativa de Safra</h2>
-        <div class="calc-container">
-            <div class="form-group">
-                <label for="cultura">Tipo de Cultura:</label>
-                <select id="cultura">
-                    <option value="60">Soja (Média de 60 sacas/ha)</option>
-                    <option value="150">Milho (Média de 150 sacas/ha)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="hectares">Área Plantada (em Hectares):</label>
-                <input type="number" id="hectares" placeholder="Ex: 50" min="1">
-            </div>
-            <button class="btn" style="width: 100%;" onclick="calcularSafra()">Calcular Estimativa</button>
-            
-            <div class="result" id="resultado-calculo"></div>
+    <!-- JANELA MODAL (CONTEÚDO COMPLEMENTAR) -->
+    <div class="modal-overlay" id="modalSustentabilidade" onclick="fecharModalSustentabilidade(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="fecharModalSustentabilidade(event)">&times;</button>
+            <h2>🌱 Pilares da Sustentabilidade no Agro</h2>
+            <p>A produção moderna utiliza a tecnologia para produzir mais utilizando menos recursos naturais. Conheça as principais práticas:</p>
+            <ul>
+                <li><strong>Plantio Direto:</strong> Cultivo sobre a palha da safra anterior. Protege o solo contra a erosão e mantém a umidade da terra.</li>
+            </ul>
         </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 AgroTech. Cultivando conhecimento e tecnologia.</p>
-    </footer>
-
-    <!-- LOGICA JAVASCRIPT -->
-    <script>
-        function calcularSafra() {
-            const produtividadeMedia = parseFloat(document.getElementById('cultura').value);
-            const hectares = parseFloat(document.getElementById('hectares').value);
-            const resultadoDiv = document.getElementById('resultado-calculo');
-
-            if (isNaN(hectares) || hectares <= 0) {
-                resultadoDiv.style.display = 'block';
-                resultadoDiv.style.borderColor = '#ef4444';
-                resultadoDiv.innerHTML = 'Por favor, insira um número válido de hectares.';
-                return;
-            }
-
-            const producaoTotal = produtividadeMedia * hectares;
-            const culturaSelecionada = document.getElementById('cultura').options[document.getElementById('cultura').selectedIndex].text.split(' ')[0];
-
-            resultadoDiv.style.display = 'block';
-            resultadoDiv.style.borderColor = 'var(--primary)';
-            resultadoDiv.innerHTML = `Estimativa de produção total para ${culturaSelecionada}: <br> 🌾 ${producaoTotal.toLocaleString('pt-BR')} sacas no total para os ${hectares} hectares.`;
-        }
-    </script>
+    </div>
 </body>
 </html>

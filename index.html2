@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Agronegócio Moderno</title>
+    <title>AgroTech - O Futuro do Campo</title>
     
-    <!-- ESTILOS CSS -->
     <style>
-        /* Configurações Gerais */
+        /* ==================== CSS (ESTILO) ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -20,69 +19,57 @@
         }
 
         body {
+            background-color: #f4f7f5;
             color: #333;
             line-height: 1.6;
-            padding-top: 80px; /* Evita que o topo suma sob o menu fixo */
         }
 
-        /* Cabeçalho */
         header {
             background-color: #1b4332;
-            color: #fff;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 10%;
-            position: fixed;
-            width: 100%;
+            position: sticky;
             top: 0;
-            left: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .logo {
+        header .logo {
             font-size: 24px;
             font-weight: bold;
         }
 
-        .logo span {
+        header .logo span {
             color: #52b788;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav ul li a {
-            color: #fff;
+        nav a {
+            color: white;
             text-decoration: none;
+            margin-left: 20px;
             font-weight: 500;
-            transition: color 0.3s;
         }
 
-        nav ul li a:hover {
+        nav a:hover {
             color: #52b788;
         }
 
-        /* Banner Principal */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://unsplash.com') no-repeat center center/cover;
-            height: calc(100vh - 80px);
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://unsplash.com') no-repeat center center/cover;
+            height: 65vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: #fff;
+            color: white;
             padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 46px;
             margin-bottom: 20px;
         }
 
@@ -93,14 +80,14 @@
 
         .btn {
             background-color: #52b788;
-            color: #fff;
+            color: white;
             padding: 12px 30px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
             border: none;
             cursor: pointer;
-            transition: background 0.3s;
+            display: inline-block;
             font-size: 16px;
         }
 
@@ -108,233 +95,251 @@
             background-color: #40916c;
         }
 
-        /* Seções */
-        .section {
-            padding: 80px 10%;
+        .container {
+            padding: 60px 10%;
             text-align: center;
         }
 
-        .bg-light {
-            background-color: #f4f9f4;
+        .bg-white {
+            background-color: white;
         }
 
-        h2 {
-            font-size: 36px;
-            color: #1b4332;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: #777;
-            margin-bottom: 40px;
-        }
-
-        /* Grid de Cards */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+        .features {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            background-color: #e9f5ed;
+            flex-wrap: wrap;
         }
 
         .card {
-            background: #fff;
+            background: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-top: 5px solid #2d6a4f;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 250px;
         }
 
         .card h3 {
+            color: #1b4332;
             margin-bottom: 15px;
-            color: #2d6a4f;
         }
 
-        /* Abas Interativas */
-        .tabs {
-            margin-bottom: 30px;
-        }
-
-        .tab-btn {
-            background: #e0e0e0;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 5px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background-color: #2d6a4f;
-            color: #fff;
-        }
-
-        .tab-content {
-            background: #fff;
-            padding: 30px;
+        /* 📊 ESTILOS DA TABELA DE COTAÇÕES */
+        .table-container {
+            max-width: 800px;
+            margin: 20px auto;
+            overflow-x: auto;
+            background: white;
+            padding: 20px;
             border-radius: 8px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        /* Formulário */
-        .form {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2d6a4f;
+            color: white;
+        }
+
+        .alta { color: #2b9348; font-weight: bold; }
+        .baixa { color: #d90429; font-weight: bold; }
+
+        /* 🧮 ESTILOS DO SIMULADOR */
+        .simulador-box {
             max-width: 500px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            background: #e9f5ed;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: left;
         }
 
-        .form input, .form textarea {
+        .simulador-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1b4332;
+        }
+
+        .simulador-box input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
         }
 
-        /* Rodapé */
+        .resultado-simulador {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-left: 5px solid #52b788;
+            font-weight: bold;
+            display: none;
+        }
+
         footer {
             background-color: #1b4332;
-            color: #fff;
+            color: white;
             text-align: center;
             padding: 20px;
             font-size: 14px;
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-            }
-            nav ul {
-                margin-top: 15px;
-            }
-            .hero h1 {
-                font-size: 32px;
-            }
-            .section {
-                padding: 60px 20px;
-            }
+        /* ♿ BOTÃO DE ACESSIBILIDADE */
+        .btn-acessibilidade {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #028090;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .btn-acessibilidade:hover {
+            transform: scale(1.1);
+        }
+
+        /* 🌓 CLASSE DE ALTO CONTRASTE */
+        body.alto-contraste {
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+
+        body.alto-contraste header, 
+        body.alto-contraste footer,
+        body.alto-contraste .card,
+        body.alto-contraste .table-container,
+        body.alto-contraste .simulador-box,
+        body.alto-contraste .resultado-simulador {
+            background-color: #111 !important;
+            border: 1px solid #fff;
+            color: #fff !important;
+        }
+
+        body.alto-contraste nav a,
+        body.alto-contraste .card h3,
+        body.alto-contraste .simulador-box label,
+        body.alto-contraste td,
+        body.alto-contraste th {
+            color: #ff0 !important;
+        }
+
+        body.alto-contraste .btn {
+            background-color: #ff0 !important;
+            color: #000 !important;
+        }
+        
+        body.alto-contraste .alta, body.alto-contraste .baixa {
+            color: #fff !important;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <!-- Cabeçalho e Menu de Navegação -->
+    <!-- ==================== CONTEÚDO (HTML) ==================== -->
     <header>
-        <div class="logo">Agro<span>Futuro</span></div>
+        <div class="logo">Agro<span>Tech</span></div>
         <nav>
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#tecnologia">Tecnologia</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#tecnologia">Tecnologia</a>
+            <a href="#cotacoes">Mercado</a>
+            <a href="#simulador">Calculadora</a>
         </nav>
     </header>
 
-    <!-- Banner Principal -->
+    <!-- Banner Principal (URL corrigida) -->
     <section id="inicio" class="hero">
-        <div class="hero-text">
-            <h1>O Futuro do Agro é Tech</h1>
-            <p>Inovação, sustentabilidade e produtividade para alimentar o mundo.</p>
-            <a href="#tecnologia" class="btn">Conhecer Tecnologias</a>
+        <div class="hero-content">
+            <h1>Inovação e Sustentabilidade no Campo</h1>
+            <p>Conectando tecnologia de ponta com a produção agrícola.</p>
+            <a href="#tecnologia" class="btn">Conhecer Soluções</a>
         </div>
     </section>
 
-    <!-- Seção Sobre o Agro -->
-    <section id="sobre" class="section">
-        <h2>A Força do Campo</h2>
-        <p class="subtitle">O agronegócio move a economia e garante a segurança alimentar global.</p>
-        <div class="grid">
-            <div class="card">
-                <h3>Sustentabilidade</h3>
-                <p>Práticas agrícolas que preservam o meio ambiente e os recursos naturais.</p>
-            </div>
-            <div class="card">
-                <h3>Produtividade</h3>
-                <p>Uso eficiente da terra com alta tecnologia para recordes de safra.</p>
-            </div>
-            <div class="card">
-                <h3>Exportação</h3>
-                <p>O campo brasileiro abastecendo mercados nos quatro cantos do planeta.</p>
-            </div>
+    <!-- Quem Somos -->
+    <section id="sobre" class="container bg-white">
+        <h2>Quem Somos</h2>
+        <p style="max-width: 800px; margin: 20px auto 0 auto;">Somos líderes na transformação digital do agronegócio, desenvolvendo soluções inteligentes que aumentam a produtividade da lavoura. Atuamos integrando inteligência de dados, maquinários conectados e responsabilidade socioambiental.</p>
+    </section>
+
+    <!-- Tecnologias Expandidas -->
+    <section id="tecnologia" class="features container">
+        <div class="card">
+            <h3>Drones e Mapeamento</h3>
+            <p>Monitoramento aéreo detalhado da saúde da lavoura em tempo real e detecção precoce de pragas.</p>
+        </div>
+        <div class="card">
+            <h3>Gestão de Solo</h3>
+            <p>Análise profunda de dados climáticos e sensores inteligentes de umidade para irrigação precisa.</p>
+        </div>
+        <div class="card">
+            <h3>Big Data Agro</h3>
+            <p>Cruzamento de dados históricos e previsões preditivas para auxiliar na tomada de decisão da colheita.</p>
         </div>
     </section>
 
-    <!-- Seção de Tecnologia (Interativa) -->
-    <section id="tecnologia" class="section bg-light">
-        <h2>Inovação no Campo</h2>
-        <p class="subtitle">Clique nos botões para ver as ferramentas da agricultura 4.0.</p>
+    <!-- NOVA SEÇÃO: Mercado e Commodities em Tempo Real -->
+    <section id="cotacoes" class="container bg-white">
+        <h2>Cotações do Mercado</h2>
+        <p>Acompanhe os valores médios das principais commodities agrícolas do país.</p>
         
-        <div class="tabs">
-            <button class="tab-btn active" onclick="mudarAba('drones', event)">Drones</button>
-            <button class="tab-btn" onclick="mudarAba('ia', event)">Inteligência Artificial</button>
-            <button class="tab-btn" onclick="mudarAba('maquinas', event)">Maquinário Autônomo</button>
-        </div>
-
-        <div id="conteudo-aba" class="tab-content">
-            <h3>Drones Agrícolas</h3>
-            <p>Mapeamento de lavouras, identificação de pragas e aplicação precisa de insumos diretamente do céu.</p>
-        </div>
-    </section>
-
-    <!-- Seção de Contato -->
-    <section id="contato" class="section">
-        <h2>Fale Conosco</h2>
-        <form id="agro-form" class="form">
-            <input type="text" id="nome" placeholder="Seu Nome" required>
-            <input type="email" id="email" placeholder="Seu E-mail" required>
-            <textarea id="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
-            <button type="submit" class="btn">Enviar Mensagem</button>
-        </form>
-    </section>
-
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2026 AgroFuturo. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- INTERATIVIDADE JAVASCRIPT -->
-    <script>
-        // Dados para as abas de tecnologia
-        const informacoesTecnologia = {
-            drones: {
-                titulo: "Drones Agrícolas",
-                texto: "Mapeamento completo de lavouras, identificação rápida de pragas, falhas de plantio e aplicação ultra precisa de insumos diretamente do céu."
-            },
-            ia: {
-                titulo: "Inteligência Artificial",
-                texto: "Algoritmos avançados que analisam dados climáticos e do solo para prever o melhor momento de plantar, irrigar e colher com desperdício zero."
-            },
-            maquinas: {
-                titulo: "Maquinário Autônomo",
-                texto: "Tratores e colheitadeiras controlados por GPS e sensores que operam sozinhos dia e noite, otimizando as rotas e economizando combustível."
-            }
-        };
-
-        // Função para alternar o conteúdo das abas
-        function mudarAba(tipoTecnologia, evento) {
-            // Atualiza o texto na tela
-            const container = document.getElementById('conteudo-aba');
-            container.innerHTML = `
-                <h3>${informacoesTecnologia[tipoTecnologia].titulo}</h3>
-                <p>${informacoesTecnologia[tipoTecnologia].texto}</p>
-            `;
-
-            // Atualiza a classe ativa nos botões
-            const botoes = document.querySelectorAll('.tab-btn');
-            botoes.forEach(botao => botao.classList.remove('active'));
-            
-            // Adiciona classe ativa ao botão clicado
-            evento.target.classList.add('active');
-        }
-
-        // Controle do formulário de contato
-        document.getElementById('agro-form').addEventListener('submit', function(event) {
-      }
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Unidade</th>
+                        <th>Preço Base</th>
+                        <th>Variação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Soja</td>
+                        <td>Saca (60kg)</td>
+                        <td>R$ 138,50</td>
+                        <td class="alta">+1,24% ▲</td>
+                    </tr>
+                    <tr>
+                        <td>Milho</td>
+                        <td>Saca (60kg)</td>
+                        <td>R$ 62,10</td>
+                        <td class="baixa">-0.45% ▼</td>
+                    </tr>
+                    <tr>
+                        <td>Café Arábica</td>
+                        <td>Saca (60kg)</td>
+                        <td>R$ 1.045,00</td>
+                        <td class="alta">+2,10% ▲</td>
+                    </tr>
+                    <tr>
+                        <td>Algodão</td>
+                        <td>Arroba (15kg)</td>
+                        <td>R$ 142,30</td>

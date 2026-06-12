@@ -3,17 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Agronegócio</title>
+    <title>AgroTech - O Futuro do Agronegócio</title>
     <style>
-        /* Cores e Estilos Gerais */
-        :root {
-            --primary-color: #2c5e3b;
-            --secondary-color: #8b5a2b;
-            --bg-color: #f4f7f5;
-            --card-color: #ffffff;
-            --text-color: #333333;
-        }
-
+        /* --- ESTILOS GERAIS --- */
         * {
             margin: 0;
             padding: 0;
@@ -21,51 +13,129 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        :root {
+            --primary: #2d6a4f;
+            --secondary: #52b788;
+            --dark: #1b4332;
+            --light: #f4f9f4;
+            --text: #2d3748;
+        }
+
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--light);
+            color: var(--text);
             line-height: 1.6;
         }
 
-        /* Cabeçalho */
+        /* --- NAVBAR --- */
         header {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://unsplash.com') no-repeat center center/cover;
-            color: white;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* --- HERO BANNER --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://unsplash.com') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 80px 20px;
+            color: white;
+            padding: 0 1rem;
+            margin-top: 60px;
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        header p {
+        .hero p {
             font-size: 1.2rem;
             max-width: 600px;
-            margin: 0 auto;
+            margin-bottom: 2rem;
         }
 
-        /* Container Principal */
-        .container {
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary);
+        }
+
+        /* --- SEÇÃO PILARES --- */
+        .sections {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 3rem;
+            font-size: 2rem;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
         }
 
-        /* Cards do Agro */
         .card {
-            background-color: var(--card-color);
+            background: white;
+            padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 25px;
-            border-top: 5px solid var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             transition: transform 0.3s;
         }
 
@@ -73,142 +143,150 @@
             transform: translateY(-5px);
         }
 
-        .card h2 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
 
-        /* Botões */
-        .btn-info {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
+        /* --- CALCULADORA INTERATIVA --- */
+        .calc-container {
+            background-color: white;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
             width: 100%;
-            transition: background 0.2s;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+        }
+
+        .result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--light);
+            border-left: 5px solid var(--primary);
             font-weight: bold;
+            display: none;
         }
 
-        .btn-info:hover {
-            background-color: #1e3f28;
-        }
-
-        /* Características Ocultas */
-        .caracteristicas {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, margin-top 0.3s ease-out;
-        }
-
-        .caracteristicas.ativo {
-            max-height: 300px; /* Altura máxima para a animação funcionar */
-            margin-top: 15px;
-        }
-
-        .caracteristicas ul {
-            list-style-type: none;
-        }
-
-        .caracteristicas li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 0.95rem;
-        }
-
-        .caracteristicas li strong {
-            color: var(--secondary-color);
-        }
-
-        /* Rodapé */
+        /* --- FOOTER --- */
         footer {
-            text-align: center;
-            padding: 20px;
-            background-color: var(--primary-color);
+            background-color: var(--dark);
             color: white;
-            margin-top: 40px;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <header>
-        <h1>O Poder do Agronegócio</h1>
-        <p>Descubra os principais pilares e as características fundamentais que movem a produção no campo e alimentam o mundo.</p>
+        <nav class="nav-container">
+            <div class="logo">🌱 AgroTech</div>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#pilares">Inovação</a></li>
+                <li><a href="#calculadora">Simulador</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="container">
+    <!-- HERO BANNER -->
+    <section class="hero" id="inicio">
+        <h1>O Futuro do Agronegócio é Sustentável</h1>
+        <p>Unindo tecnologia de ponta, produtividade e respeito ao meio ambiente para alimentar o mundo.</p>
+        <a href="#calculadora" class="btn">Simular Produtividade</a>
+    </section>
+
+    <!-- PILARES DO AGRO -->
+    <section class="sections" id="pilares">
+        <h2 class="section-title">Inovação no Campo</h2>
         <div class="grid">
-
-            <!-- Card 1: Agricultura de Precisão -->
             <div class="card">
-                <h2>Agricultura de Precisão</h2>
-                <p>Uso de alta tecnologia no gerenciamento do campo para otimizar a produção.</p>
-                <button class="btn-info" onclick="toggleInfo(this)">Ver Características</button>
-                <div class="caracteristicas">
-                    <ul>
-                        <li><strong>Drones e Satélites:</strong> Monitoramento em tempo real da saúde das lavouras.</li>
-                        <li><strong>GPS Agrícola:</strong> Direcionamento exato de tratores, evitando desperdício de insumos.</li>
-                        <li><strong>Análise de Solo:</strong> Aplicação de fertilizantes apenas onde é realmente necessário.</li>
-                    </ul>
-                </div>
+                <h3>🚜 Agricultura de Precisão</h3>
+                <p>Uso de sensores, IoT e GPS para aplicar insumos no local correto e na quantidade exata, reduzindo custos e desperdícios.</p>
             </div>
-
-            <!-- Card 2: Pecuária Sustentável -->
             <div class="card">
-                <h2>Pecuária Sustentável</h2>
-                <p>Criação de animais focada no bem-estar e no respeito ao meio ambiente.</p>
-                <button class="btn-info" onclick="toggleInfo(this)">Ver Características</button>
-                <div class="caracteristicas">
-                    <ul>
-                        <li><strong>Integração ILPF:</strong> Integração Lavoura-Pecuária-Floresta para recuperar o solo.</li>
-                        <li><strong>Rastreabilidade:</strong> Histórico completo do animal desde o nascimento até o consumidor.</li>
-                        <li><strong>Manejo Rotacionado:</strong> Divisão de pastos para evitar a degradação da terra.</li>
-                    </ul>
-                </div>
+                <h3>📊 Gestão de Dados</h3>
+                <p>Softwares analíticos que ajudam o produtor a prever pragas, analisar o solo e tomar decisões baseadas em dados reais.</p>
             </div>
-
-            <!-- Card 3: Agroindústria -->
             <div class="card">
-                <h2>Agroindústria</h2>
-                <p>A transformação das matérias-primas brutas do campo em produtos prontos.</p>
-                <button class="btn-info" onclick="toggleInfo(this)">Ver Características</button>
-                <div class="caracteristicas">
-                    <ul>
-                        <li><strong>Valor Agregado:</strong> Transforma grãos em óleos, rações e biocombustíveis.</li>
-                        <li><strong>Logística Complexa:</strong> Exige cadeias de frio e transporte rápido para evitar perdas.</li>
-                        <li><strong>Segurança Alimentar:</strong> Rigoroso controle de qualidade e padrões internacionais.</li>
-                    </ul>
-                </div>
+                <h3>💧 Sustentabilidade</h3>
+                <p>Técnicas modernas de manejo de água, rotação de culturas e bioinsumos que preservam os recursos naturais do planeta.</p>
             </div>
-
         </div>
-    </div>
+    </section>
 
+    <!-- SIMULADOR INTERATIVO -->
+    <section class="sections" id="calculadora">
+        <h2 class="section-title">Simulador de Estimativa de Safra</h2>
+        <div class="calc-container">
+            <div class="form-group">
+                <label for="cultura">Tipo de Cultura:</label>
+                <select id="cultura">
+                    <option value="60">Soja (Média de 60 sacas/ha)</option>
+                    <option value="150">Milho (Média de 150 sacas/ha)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="hectares">Área Plantada (em Hectares):</label>
+                <input type="number" id="hectares" placeholder="Ex: 50" min="1">
+            </div>
+            <button class="btn" style="width: 100%;" onclick="calcularSafra()">Calcular Estimativa</button>
+            
+            <div class="result" id="resultado-calculo"></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Portal do Agro - Conectando a tecnologia ao campo.</p>
+        <p>&copy; 2026 AgroTech. Cultivando conhecimento e tecnologia.</p>
     </footer>
 
+    <!-- LOGICA JAVASCRIPT -->
     <script>
-        function toggleInfo(botao) {
-            // Encontra a div de características que está logo após o botão clicado
-            const caracteristicas = botao.nextElementSibling;
-            
-            // Alterna a classe 'ativo' para abrir ou fechar
-            caracteristicas.classList.toggle('ativo');
-            
-            // Muda o texto do botão de acordo com o estado
-            if (caracteristicas.classList.contains('ativo')) {
-                botao.textContent = "Ocultar Características";
-                botao.style.backgroundColor = "#8b5a2b"; // Muda a cor para marrom quando aberto
-            } else {
-                botao.textContent = "Ver Características";
-                botao.style.backgroundColor = "#2c5e3b"; // Volta para o verde original
+        function calcularSafra() {
+            const produtividadeMedia = parseFloat(document.getElementById('cultura').value);
+            const hectares = parseFloat(document.getElementById('hectares').value);
+            const resultadoDiv = document.getElementById('resultado-calculo');
+
+            if (isNaN(hectares) || hectares <= 0) {
+                resultadoDiv.style.display = 'block';
+                resultadoDiv.style.borderColor = '#ef4444';
+                resultadoDiv.innerHTML = 'Por favor, insira um número válido de hectares.';
+                return;
             }
+
+            const producaoTotal = produtividadeMedia * hectares;
+            const culturaSelecionada = document.getElementById('cultura').options[document.getElementById('cultura').selectedIndex].text.split(' ')[0];
+
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.style.borderColor = 'var(--primary)';
+            resultadoDiv.innerHTML = `Estimativa de produção total para ${culturaSelecionada}: <br> 🌾 ${producaoTotal.toLocaleString('pt-BR')} sacas no total para os ${hectares} hectares.`;
         }
     </script>
-
 </body>
 </html>

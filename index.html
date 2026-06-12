@@ -3,36 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroTech - O Futuro do Campo</title>
+    <title>AgroTech - Inovação no Campo</title>
     
+    <!-- ESTILOS VISUAIS (CSS) -->
     <style>
-        /* ==================== CSS (ESTILO) ==================== */
+        /* Configurações Gerais */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f4f7f5;
+            background-color: #f9fbf9;
             color: #333;
-            line-height: 1.6;
         }
 
+        /* Menu */
         header {
             background-color: #1b4332;
-            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 10%;
-            position: sticky;
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         header .logo {
+            color: #fff;
             font-size: 24px;
             font-weight: bold;
         }
@@ -42,69 +45,87 @@
         }
 
         nav a {
-            color: white;
+            color: #fff;
             text-decoration: none;
             margin-left: 20px;
             font-weight: 500;
+            transition: 0.3s;
         }
 
         nav a:hover {
             color: #52b788;
         }
 
+        /* Banner Hero */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('https://unsplash.com') no-repeat center center/cover;
-            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://unsplash.com') no-repeat center center/cover;
+            height: 80vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: white;
+            color: #fff;
             padding: 0 20px;
+            margin-top: 60px;
         }
 
         .hero h1 {
-            font-size: 42px;
+            font-size: 48px;
             margin-bottom: 20px;
         }
 
         .hero p {
             font-size: 18px;
             margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn {
             background-color: #52b788;
-            color: white;
+            color: #1b4332;
             padding: 12px 30px;
             text-decoration: none;
-            border-radius: 5px;
             font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
         }
 
         .btn:hover {
             background-color: #40916c;
+            color: #fff;
         }
 
-        .container {
-            padding: 60px 10%;
+        /* Soluções (Grid) */
+        .services {
+            padding: 80px 10%;
             text-align: center;
         }
 
-        .features {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            background-color: #e9f5ed;
+        .services h2 {
+            font-size: 36px;
+            color: #1b4332;
+            margin-bottom: 40px;
+        }
+
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .card {
-            background: white;
+            background-color: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            flex: 1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #2d6a4f;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .card h3 {
@@ -112,6 +133,79 @@
             margin-bottom: 15px;
         }
 
+        /* Calculadora */
+        .calc-section {
+            background-color: #e9f5ed;
+            padding: 80px 10%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .calc-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .calc-container h2 {
+            color: #1b4332;
+            margin-bottom: 10px;
+        }
+
+        .calc-container p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #2d6a4f;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #1b4332;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* Rodapé */
         footer {
             background-color: #1b4332;
             color: white;
@@ -119,108 +213,109 @@
             padding: 20px;
             font-size: 14px;
         }
-
-        /* ♿ BOTÃO DE ACESSIBILIDADE FIXADO NO CANTO INFERIOR DIREITO */
-        .btn-acessibilidade {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #028090;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-
-        .btn-acessibilidade:hover {
-            transform: scale(1.1);
-        }
-
-        /* 🌓 CLASSE DE ALTO CONTRASTE ATIVADA PELO JAVASCRIPT */
-        body.alto-contraste {
-            background-color: #000 !important;
-            color: #fff !important;
-        }
-
-        body.alto-contraste header, 
-        body.alto-contraste footer,
-        body.alto-contraste .card {
-            background-color: #111 !important;
-            border: 1px solid #fff;
-            color: #fff !important;
-        }
-
-        body.alto-contraste nav a,
-        body.alto-contraste .card h3 {
-            color: #ff0 !important;
-        }
-
-        body.alto-contraste .btn {
-            background-color: #ff0 !important;
-            color: #000 !important;
-        }
     </style>
 </head>
 <body>
 
-    <!-- ==================== CONTEÚDO (HTML) ==================== -->
+    <!-- ESTRUTURA (HTML) -->
+    
+    <!-- Menu Superior -->
     <header>
         <div class="logo">Agro<span>Tech</span></div>
         <nav>
             <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#tecnologia">Tecnologia</a>
+            <a href="#solucoes">Soluções</a>
+            <a href="#calculadora">Calculadora</a>
         </nav>
     </header>
 
+    <!-- Banner Principal -->
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <h1>Inovação e Sustentabilidade no Campo</h1>
-            <p>Conectando tecnologia de ponta com a produção agrícola.</p>
-            <a href="#tecnologia" class="btn">Conhecer Soluções</a>
+            <h1>O Futuro da Agricultura Inteligente</h1>
+            <p>Conectamos tecnologia de ponta ao manejo sustentável para aumentar a produtividade da sua lavoura.</p>
+            <a href="#solucoes" class="btn">Saiba Mais</a>
         </div>
     </section>
 
-    <section id="sobre" class="container">
-        <h2>Quem Somos</h2>
-        <p>Somos líderes na transformação digital do agronegócio, desenvolvendo soluções inteligentes que aumentam a produtividade da lavoura.</p>
+    <!-- Seção de Soluções -->
+    <section id="solucoes" class="services">
+        <h2>Nossas Soluções</h2>
+        <div class="grid-services">
+            <div class="card">
+                <h3>Monitoramento via Drone</h3>
+                <p>Análise em tempo real da saúde da plantação e identificação precoce de pragas.</p>
+            </div>
+            <div class="card">
+                <h3>Gestão de Solo</h3>
+                <p>Sensores inteligentes IoT que medem a umidade e os nutrientes da terra de forma contínua.</p>
+            </div>
+            <div class="card">
+                <h3>Previsão Climática</h3>
+                <p>Inteligência artificial cruzando dados para indicar o momento ideal de plantio e colheita.</p>
+            </div>
+        </div>
     </section>
 
-    <section id="tecnologia" class="features container">
-        <div class="card">
-            <h3>Drones e Mapeamento</h3>
-            <p>Monitoramento aéreo detalhado da saúde da lavoura em tempo real.</p>
-        </div>
-        <div class="card">
-            <h3>Gestão de Solo</h3>
-            <p>Análise de dados climáticos e sensores para irrigação precisa.</p>
+    <!-- Seção Interativa (Calculadora) -->
+    <section id="calculadora" class="calc-section">
+        <div class="calc-container">
+            <h2>Simulador de Produtividade</h2>
+            <p>Descubra a estimativa de colheita baseada no tamanho da sua área plantada.</p>
+            
+            <div class="form-group">
+                <label for="hectares">Tamanho da área (em hectares):</label>
+                <input type="number" id="hectares" placeholder="Ex: 50" min="1">
+            </div>
+            
+            <div class="form-group">
+                <label for="cultura">Tipo de Cultura:</label>
+                <select id="cultura">
+                    <option value="soja">Soja</option>
+                    <option value="milho">Milho</option>
+                </select>
+            </div>
+
+            <button onclick="calcularSafra()">Calcular Estimativa</button>
+            <div id="resultado" class="result-box"></div>
         </div>
     </section>
 
+    <!-- Rodapé -->
     <footer>
-        <p>&copy; 2026 AgroTech. Todos os direitos reservados.</p>
+        <p>&copy; 2026 AgroTech Soluções Agrícolas. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- O BOTÃO FLUTUANTE -->
-    <button id="btnAcessibilidade" class="btn-acessibilidade" aria-label="Ativar Alto Contraste">♿</button>
-
-    <!-- ==================== LÓGICA (JAVASCRIPT) ==================== -->
+    <!-- LÓGICA (JAVASCRIPT) -->
     <script>
-        const btnAcessibilidade = document.getElementById('btnAcessibilidade');
+        function calcularSafra() {
+            const hectares = document.getElementById('hectares').value;
+            const cultura = document.getElementById('cultura').value;
+            const resultadoDiv = document.getElementById('resultado');
 
-        btnAcessibilidade.addEventListener('click', () => {
-            // Liga e desliga a classe de alto contraste ao clicar no botão
-            document.body.classList.toggle('alto-contraste');
-        });
+            if (hectares === "" || hectares <= 0) {
+                resultadoDiv.style.display = "block";
+                resultadoDiv.style.backgroundColor = "#ffcccc";
+                resultadoDiv.style.color = "#cc0000";
+                resultadoDiv.innerHTML = "Por favor, digite uma quantidade de hectares válida.";
+                return;
+            }
+
+            let rendimentoMedioSacas = 0;
+
+            if (cultura === 'soja') {
+                rendimentoMedioSacas = 60; 
+            } else if (cultura === 'milho') {
+                rendimentoMedioSacas = 90; 
+            }
+
+            const totalEstimado = hectares * rendimentoMedioSacas;
+
+            resultadoDiv.style.display = "block";
+            resultadoDiv.style.backgroundColor = "#d4edda";
+            resultadoDiv.style.color = "#155724";
+            resultadoDiv.innerHTML = `Estimativa de produção para sua área de ${hectares}ha: <br><strong>${totalEstimado.toLocaleString('pt-BR')} sacas de ${cultura.toUpperCase()}</strong>.`;
+        }
     </script>
 </body>
 </html>

@@ -3,323 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agro Forte - Agronegócio Global e Inovação</title>
-    
+    <title>Calculadora Digital</title>
     <style>
-        /* ==========================================================================
-           1. VARIÁVEIS E ESTILOS GERAIS (CSS)
-           ========================================================================== */
-        :root {
-            --cor-primaria: #8B5A2B;      /* Marrom Terra */
-            --cor-secundaria: #FFB90F;    /* Ouro/Safra */
-            --cor-fundo: #FAFAFA;         /* Off-white */
-            --cor-fundo-escura: #2B2118;  /* Marrom Escuro */
-            --cor-texto: #1A1A1A;
-            --cor-texto-claro: #FFFFFF;
-            --fonte-base: 100%;
-            --animacao-velocidade: 0.3s;
-        }
-
-        /* Classe para Alto Contraste */
-        body.alto-contraste {
-            --cor-primaria: #000000;
-            --cor-secundaria: #FFFF00;
-            --cor-fundo: #000000;
-            --cor-fundo-escura: #121212;
-            --cor-texto: #FFFFFF;
-            --cor-texto-claro: #FFFF00;
-        }
-
-        /* Classe para Reduzir Movimento */
-        body.sem-animacao * {
-            transition: none !important;
-            animation: none !important;
-        }
-
-        /* Reset Básico */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: var(--fonte-base);
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto);
-            line-height: 1.7;
-            transition: background-color var(--animacao-velocidade), color var(--animacao-velocidade);
-        }
-
-        .container {
-            width: 85%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 0;
-        }
-
-        /* Link de Salto Rápido para Acessibilidade */
-        .link-salto {
-            position: absolute;
-            top: -100px;
-            left: 10px;
-            background: var(--cor-secundaria);
-            color: #000;
-            padding: 12px;
-            z-index: 1000;
-            font-weight: bold;
-            text-decoration: none;
-            border: 2px solid #000;
-        }
-
-        .link-salto:focus {
-            top: 10px;
-        }
-
-        /* ==========================================================================
-           2. COMPONENTES DO LAYOUT
-           ========================================================================== */
-        
-        /* Barra de Acessibilidade */
-        .barra-acessibilidade {
-            background-color: var(--cor-fundo-escura);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 8px 0;
-        }
-
-        .container-acessibilidade {
-            width: 85%;
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .barra-acessibilidade button {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--cor-texto-claro);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 6px 14px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: background var(--animacao-velocidade);
-        }
-
-        .barra-acessibilidade button:hover, 
-        .barra-acessibilidade button:focus {
-            background-color: var(--cor-secundaria);
-            color: #000;
-            outline: 2px solid var(--cor-texto-claro);
-        }
-
-        /* Cabeçalho */
-        .cabecalho {
-            background-color: var(--cor-fundo-escura);
-            color: var(--cor-texto-claro);
-            position: sticky;
-            top: 0;
-            z-index: 500;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .cabecalho .container {
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 15px 0;
+            min-height: 100vh;
+            background: #f0f2f5;
         }
 
-        .logo {
+        /* Identificador usado no seu link */
+        #calculadora {
+            background-color: #1e222b;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+            width: 320px;
+        }
+
+        #display {
+            width: 100%;
+            height: 70px;
+            background-color: #2b313d;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #ffffff;
             font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .logo span {
-            color: var(--cor-secundaria);
-        }
-
-        .menu {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        .menu a {
-            color: var(--cor-texto-claro);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 5px 0;
-            border-bottom: 2px solid transparent;
-            transition: border var(--animacao-velocidade);
-        }
-
-        .menu a:hover, 
-        .menu a:focus {
-            border-bottom-color: var(--cor-secundaria);
+            text-align: right;
+            padding: 0 15px;
             outline: none;
         }
 
-        /* Seção Hero / Destaque */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), #4A3525;
-            color: var(--cor-texto-claro);
-            padding: 120px 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 30px auto;
-        }
-
-        .btn-acao {
-            display: inline-block;
-            background-color: var(--cor-secundaria);
-            color: #000;
-            padding: 14px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform var(--animacao-velocidade);
-        }
-
-        .btn-acao:hover, 
-        .btn-acao:focus {
-            transform: scale(1.05);
-            outline: 2px solid var(--cor-texto-claro);
-        }
-
-        /* Seções de Conteúdo */
-        .secao {
-            padding: 80px 0;
-        }
-
-        .secao-alternativa {
-            background-color: rgba(139, 90, 43, 0.05);
-        }
-
-        .secao h2 {
-            font-size: 2.25rem;
-            margin-bottom: 15px;
-            color: var(--cor-primaria);
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .secao h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background-color: var(--cor-secundaria);
-        }
-
-        body.alto-contraste .secao h2 {
-            color: var(--cor-texto);
-        }
-
-        /* Blocos de Pilares/Destaques */
-        .grade-pilares {
+        .botoes {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
         }
 
-        .pilar {
-            background-color: var(--cor-fundo);
-            padding: 35px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--cor-primaria);
+        button {
+            padding: 18px;
+            font-size: 1.25rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #3a4150;
+            color: white;
+            transition: background 0.2s ease;
         }
 
-        .pilar h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
+        button:active {
+            transform: scale(0.95);
         }
 
-        /* Rodapé */
-        .rodape {
-            background-color: var(--cor-fundo-escura);
-            color: var(--cor-texto-claro);
-            text-align: center;
-            padding: 40px 0;
-            border-top: 5px solid var(--cor-secundaria);
+        button.operador {
+            background-color: #ff9f0a;
+            color: white;
+        }
+
+        button.operador:hover {
+            background-color: #cc7f08;
+        }
+
+        button.limpar {
+            background-color: #a5a5a5;
+            color: black;
+        }
+
+        button.limpar:hover {
+            background-color: #8e8e8e;
+        }
+
+        button.igual {
+            background-color: #2ec4b6;
+            grid-column: span 2;
+        }
+
+        button.igual:hover {
+            background-color: #259d92;
+        }
+
+        button:hover {
+            background-color: #4f576b;
         }
     </style>
 </head>
 <body>
 
-    <!-- Link de Acessibilidade (Salto de Teclado) -->
-    <a href="#conteudo-principal" class="link-salto">Saltar para o conteúdo principal</a>
-
-    <!-- Barra de Acessibilidade -->
-    <div class="barra-acessibilidade" role="complementary" aria-label="Recursos de Acessibilidade">
-        <div class="container-acessibilidade">
-            <button id="btn-contraste" aria-label="Alternar modo de alto contraste" aria-pressed="false">🌓 Contraste</button>
-            <button id="btn-animacao" aria-label="Parar ou ativar animações visuais" aria-pressed="false">🚫 Parar Animações</button>
-            <button id="btn-aumentar" aria-label="Aumentar o tamanho do texto">A+</button>
-            <button id="btn-diminuir" aria-label="Diminuir o tamanho do texto">A-</button>
+    <!-- Container principal com a ID do seu link -->
+    <div id="calculadora">
+        <input type="text" id="display" readonly placeholder="0">
+        
+        <div class="botoes">
+            <button class="limpar" onclick="limparDisplay()">C</button>
+            <button class="operador" onclick="inserir('/')">/</button>
+            <button class="operador" onclick="inserir('*')">x</button>
+            <button class="operador" onclick="inserir('-')">-</button>
+            
+            <button onclick="inserir('7')">7</button>
+            <button onclick="inserir('8')">8</button>
+            <button onclick="inserir('9')">9</button>
+            <button class="operador" onclick="inserir('+')">+</button>
+            
+            <button onclick="inserir('4')">4</button>
+            <button onclick="inserir('5')">5</button>
+            <button onclick="inserir('6')">6</button>
+            <button onclick="inserir('.')">,</button>
+            
+            <button onclick="inserir('1')">1</button>
+            <button onclick="inserir('2')">2</button>
+            <button onclick="inserir('3')">3</button>
+            <button onclick="inserir('0')">0</button>
+            
+            <button class="igual" onclick="calcular()">=</button>
         </div>
     </div>
 
-    <!-- Cabeçalho -->
-    <header class="cabecalho">
-        <div class="container">
-            <div class="logo">AGRO <span>FORTE</span></div>
-            <nav aria-label="Menu Principal">
-                <ul class="menu">
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#pilares">Pilares</a></li>
-                    <li><a href="#mercado">Mercado</a></li>
-                    <li><a href="#fale-conosco">Fale Conosco</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <script>
+        const display = document.getElementById('display');
 
-    <!-- Conteúdo Principal -->
-    <main id="conteudo-principal">
-        
-        <!-- Hero/Banner -->
-        <section id="inicio" class="hero" aria-label="Apresentação institucional">
-            <div class="container">
-                <h1>Logística Eficiente e Força Produtiva</h1>
-                <p>Conectando o cultivo do campo brasileiro aos maiores hubs de abastecimento e exportação mundiais com solidez e governança.</p>
-                <a href="#fale-conosco" class="btn-acao">Conheça Nossas Soluções</a>
-            </div>
-        </section>
+        function inserir(valor) {
+            if (display.value === 'Erro') {
+                display.value = '';
+            }
+            display.value += valor;
+        }
 
-        <!-- Pilares -->
-        <section id="pilares" class="secao">
-            <div class="container">
-                <h2>Nossos Pilares Operacionais</h2>
-                <div class="grade-pilares">
-                    <article class="pilar">
-                        <h3>Inovação em Larga Escala</h3>
-                        <p>Infraestrutura tecnológica de ponta para o monitoramento de safras, previsão climática assertiva e automação de processos industriais.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-    </main>
+        function limparDisplay() {
+            display.value = '';
+        }
+
+        function calcular() {
+            try {
+                // Avalia a expressão matemática digitada
+                if (display.value) {
+                    display.value = eval(display.value);
+                }
+            } catch (error) {
+                display.value = 'Erro';
+            }
+        }
+    </script>
 </body>
 </html>

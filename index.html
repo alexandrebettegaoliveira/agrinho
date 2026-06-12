@@ -3,267 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroData - Sustentabilidade Inteligente</title>
+    <title>Agro Forte - Sustentabilidade e Produtividade</title>
     
     <style>
         /* ==========================================================================
-           CSS: CONFIGURAÇÕES GERAIS E VARIÁVEIS (TEMA CLARO)
+           1. VARIÁVEIS E ESTILOS GERAIS (CSS)
            ========================================================================== */
         :root {
-            --primary-color: #2e7d32;
-            --secondary-color: #1b5e20;
-            --accent-color: #81c784;
-            --bg-color: #f1f8e9;
-            --text-color: #212121;
-            --card-bg: #ffffff;
-            --base-font-size: 100%;
+            --cor-primaria: #2e7d32;
+            --cor-secundaria: #1b5e20;
+            --cor-fundo: #ffffff;
+            --cor-fundo-claro: #f4f6f4;
+            --cor-texto: #333333;
+            --cor-texto-claro: #ffffff;
+            --fonte-base: 100%;
         }
 
-        /* ==========================================================================
-           CSS: TEMA ALTO CONTRASTE (ACESSIBILIDADE)
-           ========================================================================== */
-        .high-contrast {
-            --primary-color: #ffff00;
-            --secondary-color: #00ffff;
-            --accent-color: #ffffff;
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --card-bg: #1c1c1c;
+        /* Classe para Alto Contraste */
+        body.alto-contraste {
+            --cor-primaria: #000000;
+            --cor-secundaria: #ffffff;
+            --cor-fundo: #000000;
+            --cor-fundo-claro: #121212;
+            --cor-texto: #ffffff;
+            --cor-texto-claro: #ffff00;
+        }
+
+        /* Reset Básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, sans-serif;
-            font-size: var(--base-font-size);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            transition: background 0.3s, color 0.3s;
+            font-size: var(--fonte-base);
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Link de Salto Rápido para Teclado */
+        .link-salto {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: var(--cor-texto-claro);
+            color: var(--cor-primaria);
+            padding: 10px;
+            z-index: 100;
+            text-decoration: none;
+            border: 2px solid var(--cor-primaria);
+        }
+
+        .link-salto:focus {
+            top: 0;
         }
 
         /* ==========================================================================
-           CSS: COMPONENTES DA INTERFACE
+           2. COMPONENTES DO LAYOUT
            ========================================================================== */
+        
         /* Barra de Acessibilidade */
-        .accessibility-bar {
-            background-color: #333;
-            padding: 5px 20px;
+        .barra-acessibilidade {
+            background-color: #222;
+            padding: 5px 0;
+        }
+
+        .container-acessibilidade {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: flex-end;
             gap: 10px;
         }
 
-        .accessibility-bar button {
-            background: #555;
+        .barra-acessibilidade button {
+            background: #444;
             color: #fff;
-            border: none;
+            border: 1px solid #555;
             padding: 5px 10px;
             cursor: pointer;
+            font-weight: bold;
             border-radius: 3px;
-            font-size: 0.9rem;
         }
 
-        .accessibility-bar button:hover {
-            background: var(--primary-color);
-            color: #fff;
+        .barra-acessibilidade button:focus {
+            outline: 2px solid var(--cor-texto-claro);
         }
 
-        /* Cabeçalho e Menu */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px;
+        /* Cabeçalho */
+        .cabecalho {
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+        }
+
+        .cabecalho .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        header .logo {
-            font-size: 1.5rem;
+        .logo {
+            font-size: 1.8rem;
             font-weight: bold;
         }
 
-        header .logo span {
-            color: var(--accent-color);
+        .logo span {
+            color: #a5d6a7;
         }
 
-        header nav a {
-            color: white;
+        body.alto-contraste .logo span {
+            color: var(--cor-texto-claro);
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: var(--cor-texto-claro);
             text-decoration: none;
-            margin-left: 20px;
             font-weight: bold;
         }
 
-        header nav a:hover {
+        .menu a:hover, .menu a:focus {
             text-decoration: underline;
         }
 
         /* Banner Principal */
-        .hero {
+        .banner {
+            background-color: var(--cor-fundo-claro);
+            padding: 80px 0;
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://unsplash.com') center/cover;
-            color: white;
+            border-bottom: 4px solid var(--cor-primaria);
         }
 
-        /* Layout de Conteúdo */
-        main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .banner h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
-        .info-section {
-            margin-bottom: 40px;
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        /* Painel de Indicadores (Dashboard) */
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .btn-principal {
+            display: inline-block;
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
             margin-top: 20px;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        /* Seções e Conteúdo */
+        .secao {
+            padding: 60px 0;
         }
 
-        .data-value {
+        .fundo-claro {
+            background-color: var(--cor-fundo-claro);
+        }
+
+        .secao h2 {
             font-size: 2rem;
-            font-weight: bold;
-            margin: 10px 0;
-            color: var(--primary-color);
+            margin-bottom: 20px;
+            color: var(--cor-primaria);
         }
 
-        .status {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            background-color: #ddd;
-            color: #333;
+        body.alto-contraste .secao h2 {
+            color: var(--cor-texto);
         }
 
-        /* Cores dos status dinâmicos */
-        .status.ideal { background-color: #c8e6c9; color: #256029; }
-        .status.economia { background-color: #bbdefb; color: #1565c0; }
-        .status.carbono { background-color: #e1bee7; color: #6a1b9a; }
+        /* Grid de Serviços */
+        .grade-servicos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .cartao {
+            background-color: var(--cor-fundo);
+            border: 2px solid var(--cor-primaria);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .cartao h3 {
+            margin-bottom: 10px;
+        }
 
         /* Rodapé */
-        footer {
+        .rodape {
+            background-color: #222;
+            color: #fff;
             text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 60px;
+            padding: 20px 0;
         }
     </style>
 </head>
 <body>
 
-    <!-- Menu de Acessibilidade -->
-    <div class="accessibility-bar" role="complementary" aria-label="Ferramentas de acessibilidade">
-        <button id="alt-contrast" aria-label="Alternar alto contraste">🌓 Alto Contraste</button>
-        <button id="inc-font" aria-label="Aumentar tamanho do texto">A+</button>
-        <button id="dec-font" aria-label="Diminuir tamanho do texto">A-</button>
+    <!-- Link de Acessibilidade (Atalho de Teclado) -->
+    <a href="#conteudo-principal" class="link-salto">Ir direto para o conteúdo principal</a>
+
+    <!-- Barra de Acessibilidade -->
+    <div class="barra-acessibilidade" role="complementary" aria-label="Menu de Acessibilidade">
+        <div class="container-acessibilidade">
+            <button id="btn-contraste" aria-label="Alternar alto contraste" aria-pressed="false">🌓 Alto Contraste</button>
+            <button id="btn-aumentar" aria-label="Aumentar tamanho do texto">A+</button>
+            <button id="btn-diminuir" aria-label="Diminuir tamanho do texto">A-</button>
+        </div>
     </div>
 
     <!-- Cabeçalho -->
-    <header>
-        <div class="logo">Agro<span>Data</span></div>
-        <nav>
-            <a href="#dados">Gestão de Dados</a>
-            <a href="#sustentabilidade">Sustentabilidade</a>
-            <a href="#dashboard">Painel</a>
-        </nav>
+    <header class="cabecalho">
+        <div class="container">
+            <div class="logo">Agro <span>Forte</span></div>
+            <nav aria-label="Navegação Principal">
+                <ul class="menu">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Banner Principal -->
-    <section class="hero">
-        <h1>O Futuro do Agro é Baseado em Dados</h1>
-        <p>Otimize sua produção agrícola com monitoramento em tempo real e práticas sustentáveis.</p>
-    </section>
-
     <!-- Conteúdo Principal -->
-    <main>
-        <section id="dados" class="info-section">
-            <h2>📊 Gestão de Dados Agrícolas</h2>
-            <p>Transforme dados de sensores, clima e solo em decisões lucrativas. Nossa plataforma organiza mapas de calor, previsão de safra e histórico de umidade para maximizar seu rendimento.</p>
+    <main id="conteudo-principal">
+        
+        <!-- Banner -->
+        <section id="inicio" class="banner" aria-label="Destaque">
+            <div class="banner-conteudo">
+                <h1>Tecnologia que Alimenta o Futuro</h1>
+                <p>Unindo força, inovação e sustentabilidade para o agronegócio moderno.</p>
+                <a href="#contato" class="btn-principal">Fale Conosco</a>
+            </div>
         </section>
 
-        <section id="sustentabilidade" class="info-section">
-            <h2>🌱 Sustentabilidade Conectada</h2>
-            <p>Reduza o desperdício de água e insumos. O uso de dados permite a aplicação localizada de recursos, diminuindo o impacto ambiental e garantindo a certificação verde para sua fazenda.</p>
+        <!-- Sobre -->
+        <section id="sobre" class="secao">
+            <div class="container">
+                <h2>Sobre a Agro Forte</h2>
+                <p>Somos líderes em soluções agrícolas que respeitam o meio ambiente e multiplicam os resultados no campo. Nosso compromisso é com a segurança alimentar e o desenvolvimento tecnológico rural.</p>
+            </div>
         </section>
 
-        <!-- Painel de Dados -->
-        <section id="dashboard" class="dashboard-section">
-            <h2>📈 Painel de Monitoramento</h2>
-            <div class="grid-cards">
-                <div class="card">
-                    <h3>Umidade do Solo</h3>
-                    <p class="data-value">42%</p>
-                    <span class="status ideal">Ideal</span>
+        <!-- Serviços -->
+        <section id="servicos" class="secao fundo-claro">
+            <div class="container">
+                <h2>Nossos Serviços</h2>
+                <div class="grade-servicos">
+                    <article class="cartao">
+                        <h3>Consultoria Agronômica</h3>
+                        <p>Análise de solo e planejamento de safra com especialistas.</p>
+                    </article>
+                    <article class="cartao">
+                        <h3>Agricultura de Precisão</h3>
+                        <p>Uso de drones e sensores para otimização de recursos.</p>
+                    </article>
+                    <article class="cartao">
+                        <h3>Insumos Sustentáveis</h3>
+                        <p>Produtos biológicos que protegem a sua lavoura.</p>
+                    </article>
                 </div>
-                <div class="card">
-                    <h3>Uso de Água (Mês)</h3>
-                    <p class="data-value">12.400L</p>
-                    <span class="status economia">-15% Economia</span>
-                </div>
-                <div class="card">
-                    <h3>Créditos de Carbono</h3>
-                    <p class="data-value">+4.8 t</p>
-                    <span class="status carbono">Acumulado</span>
-                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="secao">
+            <div class="container">
+                <h2>Contato</h2>
+                <p>Quer transformar a sua produção? Entre em contato com a nossa equipe comercial.</p>
+                <p>E-mail: contato@agroforte.com.br | Telefone: (11) 9999-9999</p>
             </div>
         </section>
     </main>
 
     <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2026 AgroData. Cultivando tecnologia com respeito ao meio ambiente.</p>
+    <footer class="rodape">
+        <div class="container">
+            <p>&copy; 2026 Agro Forte. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
     <!-- ==========================================================================
-       JAVASCRIPT: COMPORTAMENTO DO MENU DE ACESSIBILIDADE
-       ========================================================================== */ -->
+       3. LÓGICA DE INTERAÇÃO (JAVASCRIPT)
+       ========================================================================== -->
     <script>
-        const btnContrast = document.getElementById('alt-contrast');
-        const btnIncFont = document.getElementById('inc-font');
-        const btnDecFont = document.getElementById('dec-font');
-        const rootElement = document.documentElement;
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnContraste = document.getElementById('btn-contraste');
+            const btnAumentar = document.getElementById('btn-aumentar');
+            const btnDiminuir = document.getElementById('btn-diminuir');
+            
+            let tamanhoAtual = 100; 
+            const limiteMaximo = 150;
+            const limiteMinimo = 80;
+            const passo = 10;
 
-        // 1. Funcionalidade de Alto Contraste
-        btnContrast.addEventListener('click', () => {
-            document.body.classList.toggle('high-contrast');
-        });
-
-        // 2. Controle do Tamanho do Texto
-        let currentSize = 100; // Porcentagem base (100%)
-
-        btnIncFont.addEventListener('click', () => {
-            if (currentSize < 140) { // Limite máximo de 140%
-                currentSize += 10;
-                rootElement.style.setProperty('--base-font-size', `${currentSize}%`);
+            // Alternar Alto Contraste
+            btnContraste.addEventListener('click', () => {
             }
-        });
-
-        btnDecFont.addEventListener('click', () => {
-            if (currentSize > 80) { // Limite mínimo de 80%
-                currentSize -= 10;
-                rootElement.style.setProperty('--base-font-size', `${currentSize}%`);
-            }
-        });
-    </script>
-</body>
-</html>
+                                          </html>

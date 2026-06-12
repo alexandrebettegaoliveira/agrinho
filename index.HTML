@@ -126,4 +126,63 @@ public class BotaoAcessibilidade extends JFrame {
         });
     }
 }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão de Acessibilidade</title>
+    
+    <style>
+        /* Estilização do botão flutuante */
+        .btn-acessibilidade {
+            position: fixed;
+            bottom: 20px; /* Distância do fundo */
+            right: 20px;  /* Distância da direita */
+            width: 60px;
+            height: 60px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 50%; /* Deixa o botão redondo */
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999; /* Garante que fica por cima de tudo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        /* Efeito ao passar o mouse */
+        .btn-acessibilidade:hover {
+            background-color: #004da0;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Conteúdo simulado do seu site -->
+    <h1>Meu Site Inclusivo</h1>
+    <p>O conteúdo da página rola por baixo do botão.</p>
+
+    <!-- O BOTÃO DE ACESSIBILIDADE -->
+    <button id="btnAcessibilidade" class="btn-acessibilidade" aria-label="Menu de Acessibilidade">♿</button>
+
+    <!-- SCRIPT JAVASCRIPT -->
+    <script>
+        // Seleciona o botão pelo ID
+        const botao = document.getElementById('btnAcessibilidade');
+
+        // Adiciona o evento de clique
+        botao.addEventListener('click', () => {
+            alert('Menu de acessibilidade ativado!');
+            // Aqui você pode abrir sua modal, aumentar fonte, mudar contraste, etc.
+        });
+    </script>
+
+</body>
+</html>
 </html>

@@ -3,180 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroTech Pro - Inteligência e Produtividade no Campo</title>
+    <title>Portal do Agronegócio Moderno</title>
     
-    <!-- ESTILOS VISUAIS (CSS) -->
+    <!-- CSS Unificado -->
     <style>
-        /* Configurações Gerais */
+        /* Reset Geral */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
-        :root {
-            --primary: #1b4332;
-            --primary-light: #2d6a4f;
-            --accent: #52b788;
-            --accent-light: #d8f3dc;
-            --dark: #081c15;
-            --light: #f4f9f4;
-            --gray: #666;
-            --white: #ffffff;
-        }
-
         body {
-            background-color: var(--light);
-            color: var(--dark);
-            padding-top: 80px;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fcfcfc;
         }
 
-        section {
-            padding: 80px 8%;
-        }
-
-        h2.section-title {
-            font-size: 36px;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        p.section-subtitle {
-            text-align: center;
-            color: var(--gray);
-            margin-bottom: 50px;
-            font-size: 16px;
-        }
-
-        /* Menu de Navegação */
+        /* Navegação */
         header {
-            background-color: var(--primary);
+            background-color: #1b4332;
+            color: #fff;
+            padding: 20px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 8%;
             position: fixed;
             width: 100%;
             top: 0;
-            left: 0;
             z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        header .logo {
-            color: var(--white);
+        .logo {
             font-size: 24px;
             font-weight: bold;
         }
 
-        header .logo span {
-            color: var(--accent);
+        .logo span {
+            color: #52b788;
         }
 
-        nav a {
-            color: var(--white);
-            text-decoration: none;
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
             margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
             font-weight: 500;
-            transition: 0.3s;
+            transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--accent);
+        nav ul li a:hover {
+            color: #52b788;
         }
 
-        /* Banner Hero */
+        /* Banner Principal */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://unsplash.com') no-repeat center center/cover;
-            height: 75vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://unsplash.com') no-repeat center center/cover;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: var(--white);
+            color: #fff;
             padding: 0 20px;
         }
 
-        .hero h1 {
-            font-size: 52px;
+        .hero-content h1 {
+            font-size: 48px;
             margin-bottom: 20px;
-            font-weight: 800;
         }
 
-        .hero p {
+        .hero-content p {
             font-size: 20px;
-            margin-bottom: 35px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 30px;
         }
 
         .btn {
-            background-color: var(--accent);
-            color: var(--primary);
-            padding: 14px 35px;
+            background-color: #52b788;
+            color: #fff;
+            padding: 12px 30px;
             text-decoration: none;
-            font-weight: bold;
             border-radius: 5px;
-            transition: 0.3s;
-            display: inline-block;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
         .btn:hover {
-            background-color: var(--primary-light);
-            color: var(--white);
-            transform: translateY(-2px);
+            background-color: #40916c;
         }
 
-        /* Grid de Soluções */
-        .services {
-            background-color: var(--white);
+        /* Estrutura de Seções */
+        .section-padding {
+            padding: 80px 10%;
         }
 
-        .grid-services {
+        .section-bg {
+            background-color: #f4f9f4;
+        }
+
+        h2 {
+            font-size: 32px;
+            text-align: center;
+            color: #1b4332;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Grid de Cards */
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .card {
-            background-color: var(--light);
-            padding: 35px;
+            background: #fff;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            border-top: 5px solid var(--primary-light);
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid #52b788;
         }
 
         .card h3 {
-            color: var(--primary);
             margin-bottom: 15px;
-            font-size: 22px;
+            color: #2d6a4f;
         }
 
-        /* Painel e Calculadora Avançada */
-        .dashboard-section {
-            background-color: var(--accent-light);
+        /* Layout Duas Colunas (Sustentabilidade) */
+        .two-column {
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
+            align-items: center;
         }
 
-        .calc-box, .chart-box {
+        .text-block {
             flex: 1;
-            min-width: 320px;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            min-width: 300px;
+        }
+
+        .stat-box {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .stat-item .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2d6a4f;
+        }
+
+        /* Tabelas de Mercado */
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2d6a4f;
+            color: #fff;
+        }
+
+        .text-green { color: #2b9348; font-weight: bold; }
+        .text-red { color: #d90429; font-weight: bold; }
+
+        /* Formulário de Contato */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .form-group {
@@ -185,216 +224,139 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 4px;
         }
 
-        button {
-            width: 100%;
-            background-color: var(--primary-light);
-            color: white;
-            border: none;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background-color: var(--primary);
-        }
-
-        .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: none;
-        }
-
-        /* Gráfico Simulado via CSS */
-        .chart-container {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            height: 200px;
-            margin-top: 30px;
-            border-left: 2px solid #ccc;
-            border-bottom: 2px solid #ccc;
-            padding-left: 10px;
-        }
-
-        .bar {
-            width: 45px;
-            background-color: var(--primary-light);
-            border-radius: 5px 5px 0 0;
-            transition: height 1s ease-in-out;
-            position: relative;
-            height: 30px; /* inicial */
-        }
-
-        .bar-label {
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .bar-value {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        /* Planos e Preços */
-        .pricing {
-            background-color: var(--white);
-        }
-
-        .grid-pricing {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .price-card {
-            background: var(--light);
-            padding: 40px 30px;
-            border-radius: 8px;
+        #formFeedback {
             text-align: center;
-            border: 1px solid #e0e0e0;
-            position: relative;
-        }
-
-        .price-card.featured {
-            border: 2px solid var(--accent);
-            background-color: var(--white);
-            transform: scale(1.03);
-        }
-
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--accent);
-            color: var(--primary);
-            font-size: 12px;
-            font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        .price-card h3 {
-            font-size: 22px;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .price-value {
-            font-size: 36px;
-            font-weight: bold;
-            color: var(--dark);
-            margin-bottom: 25px;
-        }
-
-        .price-value span {
-            font-size: 16px;
-            color: var(--gray);
-        }
-
-        .price-features {
-            list-style: none;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-
-        .price-features li {
-            margin-bottom: 12px;
-            font-size: 15px;
-            color: #444;
-        }
-
-        .price-features li::before {
-            content: "✓ ";
-            color: var(--accent);
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
             font-weight: bold;
         }
 
-        /* Notícias / Blog */
-        .news {
-            background-color: var(--light);
+        .success { background-color: #d8f3dc; color: #1b4332; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .hidden { display: none; }
+
+        /* Rodapé */
+        footer {
+            background-color: #1b4332;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
         }
 
-        .grid-news {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* Responsividade Mobile */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            nav ul {
+                margin-top: 15px;
+            }
+            .hero-content h1 {
+                font-size: 32px;
+            }
+            .section-padding {
+                padding: 60px 5%;
+            }
         }
+    </style>
+</head>
+<body>
 
-        .news-card {
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
+    <!-- Cabeçalho e Navegação -->
+    <header>
+        <div class="logo">Agro<span>Futuro</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+                <li><a href="#mercado">Mercado</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        .news-img {
-            height: 180px;
-            background-color: #ddd;
-            background-size: cover;
-            background-position: center;
-        }
+    <!-- Seção Banner Principal -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>O Futuro da Agricultura é Tecnológico</h1>
+            <p>Conectando inovação, produtividade e sustentabilidade no campo.</p>
+            <a href="#tecnologia" class="btn">Saiba Mais</a>
+        </div>
+    </section>
 
-        .news-content {
-            padding: 25px;
-        }
+    <!-- Seção de Tecnologia -->
+    <section id="tecnologia" class="section-padding">
+        <h2>Inovação no Campo</h2>
+        <p class="subtitle">Como a tecnologia está transformando a produção agrícola.</p>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Drones e Sensores</h3>
+                <p>Mapeamento térmico e monitoramento de pragas em tempo real direto do céu.</p>
+            </div>
+            <div class="card">
+                <h3>Maquinário Autônomo</h3>
+                <p>Tratores guiados por GPS que otimizam o plantio e reduzem o desperdício.</p>
+            </div>
+            <div class="card">
+                <h3>Big Data & IA</h3>
+                <p>Análise de dados climáticos e do solo para tomadas de decisões precisas.</p>
+            </div>
+        </div>
+    </section>
 
-        .news-content span {
-            font-size: 12px;
-            color: var(--accent);
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+    <!-- Seção de Sustentabilidade -->
+    <section id="sustentabilidade" class="section-bg section-padding">
+        <div class="two-column">
+            <div class="text-block">
+                <h2>Sustentabilidade Verde</h2>
+                <p>O agronegócio moderno foca na preservação dos recursos naturais. Práticas como o plantio direto, rotação de culturas e o uso de bioinsumos garantem a saúde do solo e reduzem a pegada de carbono, unindo lucro e respeito ao meio ambiente.</p>
+            </div>
+            <div class="stat-box">
+                <div class="stat-item">
+                    <span class="number" data-target="35">0</span><span>%</span>
+                    <p>Mais economia de água com irrigação inteligente.</p>
+                </div>
+                <div class="stat-item">
+                    <span class="number" data-target="50">0</span><span>%</span>
+                    <p>Redução no uso de defensivos químicos com bioinsumos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        .news-content h3 {
-            margin: 10px 0;
-            color: var(--primary);
-        }
-
-        /* Depoimentos */
-        .testimonials {
-            background: var(--white);
-        }
-
-        .grid-testimonials {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: var(--light);
-            padding: 30px;
-            border-radius: 8px;
-            font-style: italic;
-            position: relative;
-</html>
+    <!-- Seção de Cotações / Mercado -->
+    <section id="mercado" class="section-padding">
+        <h2>Painel do Mercado</h2>
+        <p class="subtitle">Confira as cotações simuladas das principais commodities brasileiras.</p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Preço Base</th>
+                        <th>Variação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Soja (Saca 60kg)</td>
+                        <td>R$ 135,00</td>
+                        <td class="text-green">+1.2%</td>
+                    </tr>
+                    <tr>
+                        <td>Milho (Saca 60kg)</td>

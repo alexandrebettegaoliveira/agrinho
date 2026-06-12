@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroTech - Inovação no Campo</title>
+    <title>AgroTech Pro - Inteligência e Produtividade no Campo</title>
     
     <!-- ESTILOS VISUAIS (CSS) -->
     <style>
@@ -16,36 +16,68 @@
             scroll-behavior: smooth;
         }
 
-        body {
-            background-color: #f9fbf9;
-            color: #333;
+        :root {
+            --primary: #1b4332;
+            --primary-light: #2d6a4f;
+            --accent: #52b788;
+            --accent-light: #d8f3dc;
+            --dark: #081c15;
+            --light: #f4f9f4;
+            --gray: #666;
+            --white: #ffffff;
         }
 
-        /* Menu */
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 80px 8%;
+        }
+
+        h2.section-title {
+            font-size: 36px;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p.section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        /* Menu de Navegação */
         header {
-            background-color: #1b4332;
+            background-color: var(--primary);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
+            padding: 20px 8%;
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
             z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         header .logo {
-            color: #fff;
+            color: var(--white);
             font-size: 24px;
             font-weight: bold;
         }
 
         header .logo span {
-            color: #52b788;
+            color: var(--accent);
         }
 
         nav a {
-            color: #fff;
+            color: var(--white);
             text-decoration: none;
             margin-left: 20px;
             font-weight: 500;
@@ -53,60 +85,55 @@
         }
 
         nav a:hover {
-            color: #52b788;
+            color: var(--accent);
         }
 
         /* Banner Hero */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://unsplash.com') no-repeat center center/cover;
-            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://unsplash.com') no-repeat center center/cover;
+            height: 75vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: #fff;
+            color: var(--white);
             padding: 0 20px;
-            margin-top: 60px;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 52px;
             margin-bottom: 20px;
+            font-weight: 800;
         }
 
         .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            max-width: 600px;
+            font-size: 20px;
+            margin-bottom: 35px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .btn {
-            background-color: #52b788;
-            color: #1b4332;
-            padding: 12px 30px;
+            background-color: var(--accent);
+            color: var(--primary);
+            padding: 14px 35px;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
             transition: 0.3s;
+            display: inline-block;
         }
 
         .btn:hover {
-            background-color: #40916c;
-            color: #fff;
+            background-color: var(--primary-light);
+            color: var(--white);
+            transform: translateY(-2px);
         }
 
-        /* Soluções (Grid) */
+        /* Grid de Soluções */
         .services {
-            padding: 80px 10%;
-            text-align: center;
-        }
-
-        .services h2 {
-            font-size: 36px;
-            color: #1b4332;
-            margin-bottom: 40px;
+            background-color: var(--white);
         }
 
         .grid-services {
@@ -116,54 +143,44 @@
         }
 
         .card {
-            background-color: #fff;
-            padding: 30px;
+            background-color: var(--light);
+            padding: 35px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 5px solid #2d6a4f;
-            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border-top: 5px solid var(--primary-light);
+            transition: 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
         .card h3 {
-            color: #1b4332;
+            color: var(--primary);
             margin-bottom: 15px;
+            font-size: 22px;
         }
 
-        /* Calculadora */
-        .calc-section {
-            background-color: #e9f5ed;
-            padding: 80px 10%;
+        /* Painel e Calculadora Avançada */
+        .dashboard-section {
+            background-color: var(--accent-light);
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
         }
 
-        .calc-container {
-            background-color: #fff;
+        .calc-box, .chart-box {
+            flex: 1;
+            min-width: 320px;
+            background: var(--white);
             padding: 40px;
             border-radius: 10px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .calc-container h2 {
-            color: #1b4332;
-            margin-bottom: 10px;
-        }
-
-        .calc-container p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         .form-group {
             margin-bottom: 20px;
-            text-align: left;
         }
 
         .form-group label {
@@ -182,7 +199,7 @@
 
         button {
             width: 100%;
-            background-color: #2d6a4f;
+            background-color: var(--primary-light);
             color: white;
             border: none;
             padding: 14px;
@@ -194,7 +211,7 @@
         }
 
         button:hover {
-            background-color: #1b4332;
+            background-color: var(--primary);
         }
 
         .result-box {
@@ -205,117 +222,179 @@
             display: none;
         }
 
-        /* Rodapé */
-        footer {
-            background-color: #1b4332;
-            color: white;
+        /* Gráfico Simulado via CSS */
+        .chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            margin-top: 30px;
+            border-left: 2px solid #ccc;
+            border-bottom: 2px solid #ccc;
+            padding-left: 10px;
+        }
+
+        .bar {
+            width: 45px;
+            background-color: var(--primary-light);
+            border-radius: 5px 5px 0 0;
+            transition: height 1s ease-in-out;
+            position: relative;
+            height: 30px; /* inicial */
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Planos e Preços */
+        .pricing {
+            background-color: var(--white);
+        }
+
+        .grid-pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            background: var(--light);
+            padding: 40px 30px;
+            border-radius: 8px;
             text-align: center;
-            padding: 20px;
-            font-size: 14px;
+            border: 1px solid #e0e0e0;
+            position: relative;
         }
-    </style>
-</head>
-<body>
 
-    <!-- ESTRUTURA (HTML) -->
-    
-    <!-- Menu Superior -->
-    <header>
-        <div class="logo">Agro<span>Tech</span></div>
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#solucoes">Soluções</a>
-            <a href="#calculadora">Calculadora</a>
-        </nav>
-    </header>
-
-    <!-- Banner Principal -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>O Futuro da Agricultura Inteligente</h1>
-            <p>Conectamos tecnologia de ponta ao manejo sustentável para aumentar a produtividade da sua lavoura.</p>
-            <a href="#solucoes" class="btn">Saiba Mais</a>
-        </div>
-    </section>
-
-    <!-- Seção de Soluções -->
-    <section id="solucoes" class="services">
-        <h2>Nossas Soluções</h2>
-        <div class="grid-services">
-            <div class="card">
-                <h3>Monitoramento via Drone</h3>
-                <p>Análise em tempo real da saúde da plantação e identificação precoce de pragas.</p>
-            </div>
-            <div class="card">
-                <h3>Gestão de Solo</h3>
-                <p>Sensores inteligentes IoT que medem a umidade e os nutrientes da terra de forma contínua.</p>
-            </div>
-            <div class="card">
-                <h3>Previsão Climática</h3>
-                <p>Inteligência artificial cruzando dados para indicar o momento ideal de plantio e colheita.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção Interativa (Calculadora) -->
-    <section id="calculadora" class="calc-section">
-        <div class="calc-container">
-            <h2>Simulador de Produtividade</h2>
-            <p>Descubra a estimativa de colheita baseada no tamanho da sua área plantada.</p>
-            
-            <div class="form-group">
-                <label for="hectares">Tamanho da área (em hectares):</label>
-                <input type="number" id="hectares" placeholder="Ex: 50" min="1">
-            </div>
-            
-            <div class="form-group">
-                <label for="cultura">Tipo de Cultura:</label>
-                <select id="cultura">
-                    <option value="soja">Soja</option>
-                    <option value="milho">Milho</option>
-                </select>
-            </div>
-
-            <button onclick="calcularSafra()">Calcular Estimativa</button>
-            <div id="resultado" class="result-box"></div>
-        </div>
-    </section>
-
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2026 AgroTech Soluções Agrícolas. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- LÓGICA (JAVASCRIPT) -->
-    <script>
-        function calcularSafra() {
-            const hectares = document.getElementById('hectares').value;
-            const cultura = document.getElementById('cultura').value;
-            const resultadoDiv = document.getElementById('resultado');
-
-            if (hectares === "" || hectares <= 0) {
-                resultadoDiv.style.display = "block";
-                resultadoDiv.style.backgroundColor = "#ffcccc";
-                resultadoDiv.style.color = "#cc0000";
-                resultadoDiv.innerHTML = "Por favor, digite uma quantidade de hectares válida.";
-                return;
-            }
-
-            let rendimentoMedioSacas = 0;
-
-            if (cultura === 'soja') {
-                rendimentoMedioSacas = 60; 
-            } else if (cultura === 'milho') {
-                rendimentoMedioSacas = 90; 
-            }
-
-            const totalEstimado = hectares * rendimentoMedioSacas;
-
-            resultadoDiv.style.display = "block";
-            resultadoDiv.style.backgroundColor = "#d4edda";
-            resultadoDiv.style.color = "#155724";
-            resultadoDiv.innerHTML = `Estimativa de produção para sua área de ${hectares}ha: <br><strong>${totalEstimado.toLocaleString('pt-BR')} sacas de ${cultura.toUpperCase()}</strong>.`;
+        .price-card.featured {
+            border: 2px solid var(--accent);
+            background-color: var(--white);
+            transform: scale(1.03);
         }
-    </script>
-</body>
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .price-card h3 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .price-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .price-value span {
+            font-size: 16px;
+            color: var(--gray);
+        }
+
+        .price-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .price-features li {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .price-features li::before {
+            content: "✓ ";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Notícias / Blog */
+        .news {
+            background-color: var(--light);
+        }
+
+        .grid-news {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .news-img {
+            height: 180px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-content span {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .news-content h3 {
+            margin: 10px 0;
+            color: var(--primary);
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background: var(--white);
+        }
+
+        .grid-testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            font-style: italic;
+            position: relative;
 </html>

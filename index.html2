@@ -3,452 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroTech - O Futuro do Campo</title>
+    <title>AgroTech - Inovação no Campo</title>
     
     <style>
-        /* ==================== CSS (ESTILO) ==================== */
+        /* ==========================================================================
+           ESTILOS (CSS)
+           ========================================================================== */
+        
+        /* Reset Geral */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
-        body {
-            background-color: #f4f7f5;
-            color: #333;
-            line-height: 1.6;
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --accent: #81c784;
+            --dark: #212121;
+            --light: #f5f5f5;
+            --white: #ffffff;
         }
 
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .bg-light {
+            background-color: var(--light);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Header e Menu */
         header {
-            background-color: #1b4332;
-            color: white;
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 20px 0;
         }
 
-        header .logo {
-            font-size: 24px;
+        .logo {
+            font-size: 1.8rem;
             font-weight: bold;
+            color: var(--dark);
         }
 
-        header .logo span {
-            color: #52b788;
+        .logo span {
+            color: var(--primary);
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            color: #52b788;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('https://unsplash.com') no-repeat center center/cover;
-            height: 60vh;
+        .nav-links {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
+            list-style: none;
+            gap: 20px;
         }
 
-        .hero h1 {
-            font-size: 42px;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Banner Principal (Hero) */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://unsplash.com') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
             margin-bottom: 20px;
         }
 
-        .hero p {
-            font-size: 18px;
+        .hero-content p {
+            font-size: 1.2rem;
             margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .btn {
-            background-color: #52b788;
-            color: white;
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
             padding: 12px 30px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            transition: background 0.3s;
         }
 
-        .btn:hover {
-            background-color: #40916c;
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
         }
 
-        .container {
-            padding: 60px 10%;
-            text-align: center;
+        /* Estrutura de Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-top: 40px;
+            align-items: center;
         }
 
-        .features {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            background-color: #e9f5ed;
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
+        /* Cards e Estatísticas */
         .card {
-            background: white;
-            padding: 30px;
+            background: var(--white);
+            padding: 40px 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            flex: 1;
+            transition: transform 0.3s;
         }
 
-        .card h3 {
-            color: #1b4332;
-            margin-bottom: 15px;
+        .card:hover {
+            transform: translateY(-5px);
         }
 
-        footer {
-            background-color: #1b4332;
-            color: white;
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 8px;
             text-align: center;
-            padding: 20px;
-            font-size: 14px;
+            border-bottom: 4px solid var(--primary);
         }
 
-        /* ♿ BOTÃO DE ACESSIBILIDADE FIXADO NO CANTO INFERIOR DIREITO */
-        .btn-acessibilidade {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #028090;
-            color: white;
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        /* Formulário de Contato */
+        .form-container {
+            max-width: 600px;
+            margin: 40px auto 0;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-submit {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 12px 25px;
             border: none;
-            border-radius: 50%;
-            font-size: 28px;
+            border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
+            font-weight: bold;
+            width: 100%;
         }
 
-        .btn-acessibilidade:hover {
-            transform: scale(1.1);
+        .btn-submit:hover {
+            background-color: #333;
         }
 
-        /* 🌓 CLASSE DE ALTO CONTRASTE ATIVADA PELO JAVASCRIPT */
-        body.alto-contraste {
-            background-color: #000 !important;
-            color: #fff !important;
+        .hidden { display: none; }
+
+        .success-msg {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 5px;
+            text-align: center;
         }
 
-        body.alto-contraste header, 
-        body.alto-contraste footer,
-        body.alto-contraste .card {
-            background-color: #111 !important;
-            border: 1px solid #fff;
-            color: #fff !important;
+        /* Rodapé */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
         }
 
-        body.alto-contraste nav a,
-        body.alto-contraste .card h3 {
-            color: #ff0 !important;
-        }
-
-        body.alto-contraste .btn {
-            background-color: #ff0 !important;
-            color: #000 !important;
+        /* Responsividade Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .btn-menu { display: block; }
+            .hero-content h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== CONTEÚDO (HTML) ==================== -->
+    <!-- Cabeçalho -->
     <header>
-        <div class="logo">Agro<span>Tech</span></div>
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#tecnologia">Tecnologia</a>
-        </nav>
+        <div class="container header-container">
+            <div class="logo">Agro<span>Tech</span></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="btn-menu" id="menuBtn">☰</button>
+        </div>
     </header>
 
-    <section id="inicio" class="hero">
+    <!-- Banner Principal -->
+    <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Inovação e Sustentabilidade no Campo</h1>
-            <p>Conectando tecnologia de ponta com a produção agrícola.</p>
-            <a href="#tecnologia" class="btn">Conhecer Soluções</a>
+            <h1>O Futuro da Agricultura É Inteligente</h1>
+            <p>Unimos tecnologia de ponta e sustentabilidade para maximizar a sua colheita.</p>
+            <a href="#servicos" class="btn-primary">Nossos Serviços</a>
         </div>
     </section>
 
-    <section id="sobre" class="container">
+    <!-- Seção Sobre -->
+    <section id="sobre" class="container section">
         <h2>Quem Somos</h2>
-        <p>Somos líderes na transformação digital do agronegócio, desenvolvendo soluções inteligentes que aumentam a produtividade da lavoura.</p>
+        <p class="section-subtitle">Líderes em soluções tecnológicas para o agronegócio moderno.</p>
+        <div class="grid-2">
+            <div>
+                <p>A AgroTech nasceu com a missão de transformar o campo. Desenvolvemos sistemas de monitoramento, automação e análise de dados para produtores de todos os portes.</p>
+                <br>
+                <p>Nosso foco é aumentar a produtividade reduzindo o impacto ambiental, garantindo um futuro próspero e sustentável para a agricultura.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 class="counter" data-target="150">0</h3>
+                    <p>Fazendas Atendidas</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="counter" data-target="30">0</h3>
+                    <p>% Aumento de Safra</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="tecnologia" class="features container">
-        <div class="card">
-            <h3>Drones e Mapeamento</h3>
-            <p>Monitoramento aéreo detalhado da saúde da lavoura em tempo real.</p>
+    <!-- Seção Serviços -->
+    <section id="servicos" class="bg-light section">
+        <div class="container">
+            <h2>Nossas Soluções</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🛸</div>
+                    <h3>Monitoramento por Drones</h3>
+                    <p>Mapeamento térmico e análise de saúde da lavoura em tempo real.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Análise de Solo AI</h3>
+                    <p>Diagnósticos precisos usando inteligência artificial para fertilização correta.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💧</div>
+                    <h3>Irrigação Automatizada</h3>
+                    <p>Sistemas inteligentes que economizam água e irrigam na quantidade exata.</p>
+                </div>
+            </div>
         </div>
-        <div class="card">
-            <h3>Gestão de Solo</h3>
-            <p>Análise de dados climáticos e sensores para irrigação precisa.</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 AgroTech. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- O BOTÃO FLUTUANTE -->
-    <button id="btnAcessibilidade" class="btn-acessibilidade" aria-label="Ativar Alto Contraste">♿</button>
-
-    <!-- ==================== LÓGICA (JAVASCRIPT) ==================== -->
-    <script>
-        const btnAcessibilidade = document.getElementById('btnAcessibilidade');
-
-        btnAcessibilidade.addEventListener('click', () => {
-            // Liga e desliga a classe de alto contraste ao clicar no botão
-            document.body.classList.toggle('alto-contraste');
-        });
-    </script>
-</body>
-<!-- ==================== SEÇÃO: SERVIÇOS (CONTINUAÇÃO) ==================== -->
-<section class="services-section">
-    <div class="services-container">
-        <!-- Card 3 -->
-        <div class="service-card">
-            <h3>Automação de Maquinário</h3>
-            <p>Integração de sistemas inteligentes para otimizar o plantio e a colheita automotiva.</p>
-        </div>
-        <!-- Card 4 -->
-        <div class="service-card">
-            <h3>Dashboards de Produtividade</h3>
-            <p>Relatórios em tempo real para tomada de decisões financeiras e operacionais rápidas.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== SEÇÃO: RESULTADOS (NÚMEROS) ==================== -->
-<section class="results-section">
-    <div class="results-container">
-        <div class="result-item">
-            <h2 class="counter" data-target="35">+0</h2>
-            <p>Eficiência no uso de água e insumos</p>
-        </div>
-        <div class="result-item">
-            <h2 class="counter" data-target="24">0</h2>
-            <p>Horas de monitoramento contínuo</p>
-        </div>
-        <div class="result-item">
-            <h2 class="counter" data-target="20">-0</h2>
-            <p>Redução nos custos operacionais</p>
-        </div>
-    </div>
-</section>
-<!-- ==================== RODAPÉ (FOOTER) ==================== -->
-<footer class="main-footer">
-    <div class="footer-container">
-        <div class="footer-brand">
-            <h2>AgroTech</h2>
-            <p>Transformando o futuro do agronegócio com inovação e sustentabilidade.</p>
-        </div>
-        <div class="footer-links">
-            <h4>Navegação</h4>
-            <ul>
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Tecnologia</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
-        </div>
-        <div class="footer-contact">
-            <h4>Contato</h4>
-            <p>E-mail: contato@agrotech.com</p>
-            <p>Telefone: (11) 99999-9999</p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 AgroTech. Todos os direitos reservados.</p>
-    </div>
-</footer>
-
-<!-- ==================== ESTILOS CSS ==================== -->
-<style>
-    /* Reset e Variáveis de Cores (Alinhar com o seu design) */
-    :root {
-        --green-dark: #0f3025;     /* Tom verde do seu menu */
-        --green-accent: #2ecc71;   /* Tom verde do seu botão */
-        --bg-light: #f4f7f6;       /* Cor de fundo clara */
-        --text-dark: #333333;
-        --text-light: #ffffff;
-    }
-
-    /* Container de Serviços */
-    .services-section {
-        background-color: var(--bg-light);
-        padding: 0 20px 60px 20px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .services-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        width: 100%;
-        max-width: 1200px;
-    }
-
-    .service-card {
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        border: 1px solid #e2e8f0;
-    }
-
-    .service-card h3 {
-        color: var(--green-dark);
-        margin-bottom: 15px;
-        font-size: 1.2rem;
-    }
-
-    .service-card p {
-        color: #666;
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-
-    /* Seção de Resultados */
-    .results-section {
-        background-color: var(--green-dark);
-        color: var(--text-light);
-        padding: 80px 20px;
-        text-align: center;
-    }
-
-    .results-container {
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        max-width: 1200px;
-        margin: 0 auto;
-        gap: 40px;
-    }
-
-    .result-item h2 {
-        font-size: 3rem;
-        color: var(--green-accent);
-        margin-bottom: 10px;
-    }
-
-    .result-item p {
-        font-size: 1.1rem;
-        opacity: 0.9;
-    }
-
-    /* Rodapé */
-    .main-footer {
-        background-color: #111;
-        color: #bbb;
-        padding: 60px 20px 20px 20px;
-        font-size: 0.9rem;
-    }
-
-    .footer-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 40px;
-        max-width: 1200px;
-        margin: 0 auto;
-        border-bottom: 1px solid #222;
-        padding-bottom: 40px;
-    }
-
-    .footer-brand h2 {
-        color: var(--text-light);
-        margin-bottom: 15px;
-    }
-
-    .footer-links h4, .footer-contact h4 {
-        color: var(--text-light);
-        margin-bottom: 15px;
-    }
-
-    .footer-links ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .footer-links ul li {
-        margin-bottom: 10px;
-    }
-
-    .footer-links ul li a {
-        color: #bbb;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-
-    .footer-links ul li a:hover {
-        color: var(--green-accent);
-    }
-
-    .footer-bottom {
-        text-align: center;
-        padding-top: 20px;
-        font-size: 0.8rem;
-    }
-</style>
-
-<!-- ==================== SCRIPT JAVASCRIPT ==================== -->
-<script>
-    // Efeito de contagem animada para a seção de resultados
-    document.addEventListener("DOMContentLoaded", () => {
-        const counters = document.querySelectorAll('.counter');
-        const speed = 50; // Quanto menor, mais rápida a animação
-
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                // Remove caracteres especiais para fazer o cálculo matemático puro
-                const currentText = counter.innerText.replace('+', '').replace('-', '');
-                const count = +currentText;
-
-                const increment = target / speed;
-
-                if (count < target) {
-                    const nextValue = Math.ceil(count + increment);
-                    // Recoloca os sinais visuais de positivo ou negativo conforme o alvo
-                    if (counter.getAttribute('data-target') == "35") {
-                        counter.innerText = `+${nextValue}%`;
-                    } else if (counter.getAttribute('data-target') == "20") {
-                        counter.innerText = `-${nextValue}%`;
-                    } else {
-                        counter.innerText = nextValue;
-                    }
-                    setTimeout(updateCount, 20);
-                } else {
-                    // Garante que o número final exato seja exibido com os sufixos corretos
-                    if (target === 35) counter.innerText = "+35%";
-                    else if (target === 20) counter.innerText = "-20%";
-                    else counter.innerText = "24h";
-                }
-            };
-
-            updateCount();
-        });
-    });
-</script>
-</html>

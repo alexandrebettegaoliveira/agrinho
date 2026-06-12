@@ -61,4 +61,69 @@
             console.log("O site abriu."); // REGISTRA O LOG DE ABERTURA
         </script>
     </body>
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
+public class BotaoAcessibilidade extends JFrame {
+
+    private JButton btnAcessibilidade;
+
+    public BotaoAcessibilidade() {
+        // Configurações da janela principal
+        setTitle("Exemplo de Acessibilidade");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+        // Layout absoluto para posicionamento livre do botão
+        setLayout(null);
+
+        // Criar o botão flutuante
+        btnAcessibilidade = new JButton("♿");
+        btnAcessibilidade.setFont(new Font("Arial", Font.BOLD, 24));
+        btnAcessibilidade.setBackground(new Color(0, 102, 204));
+        btnAcessibilidade.setForeground(Color.WHITE);
+        btnAcessibilidade.setFocusPainted(false);
+        btnAcessibilidade.setBorder(BorderFactory.createEmptyBorder());
+        
+        // Tornar o botão redondo
+        btnAcessibilidade.setPreferredSize(new Dimension(60, 60));
+        btnAcessibilidade.setSize(60, 60);
+
+        // Ação do botão
+        btnAcessibilidade.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Menu de acessibilidade aberto!");
+        });
+
+        // Adiciona o botão à janela
+        add(btnAcessibilidade);
+
+        // Listener para fixar o botão no canto inferior direito ao redimensionar a janela
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                posicionarBotao();
+            }
+        });
+    }
+
+    private void posicionarBotao() {
+        // Define as margens a partir da borda inferior direita
+        int margemDireita = 30;
+        int margemInferior = 60; // Ajustado para não sumir atrás da barra de tarefas
+        
+        int x = getContentPane().getWidth() - btnAcessibilidade.getWidth() - margemDireita;
+        int y = getContentPane().getHeight() - btnAcessibilidade.getHeight() - margemInferior;
+        
+        btnAcessibilidade.setLocation(x, y);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new BotaoAcessibilidade().setVisible(true);
+        });
+    }
+}
 </html>

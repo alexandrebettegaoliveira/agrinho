@@ -4,303 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal do Agronegócio</title>
-    
     <style>
-        /* ==========================================================================
-           1. ESTILOS DO CSS (STYLE)
-           ========================================================================== */
-        
-        /* Configurações Globais e Variáveis de Cores Padrão */
+        /* Cores e Estilos Gerais */
         :root {
-            --bg-principal: #f4f7f5;
-            --bg-card: #ffffff;
-            --cor-texto: #333333;
-            --cor-primaria: #2e7d32; /* Verde Agro */
-            --cor-secundaria: #155724;
-            --cor-link: #ffffff;
-        }
-
-        /* Classe de Alto Contraste (Acessibilidade) */
-        .alto-contraste {
-            --bg-principal: #000000;
-            --bg-card: #1c1c1c;
-            --cor-texto: #ffffff;
-            --cor-primaria: #ffff00; /* Amarelo acessível sobre preto */
-            --cor-secundaria: #ffff00;
-            --cor-link: #ffff00;
+            --primary-color: #2c5e3b;
+            --secondary-color: #8b5a2b;
+            --bg-color: #f4f7f5;
+            --card-color: #ffffff;
+            --text-color: #333333;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-principal);
-            color: var(--cor-texto);
-            transition: background 0.3s, color 0.3s;
-            padding-bottom: 60px; /* Evita que o rodapé fixo cubra conteúdo */
-        }
-
-        /* Barra de Acessibilidade */
-        .acessibilidade-container {
-            background-color: #222;
-            padding: 8px 20px;
-            text-align: right;
-        }
-
-        #btn-contraste {
-            background-color: #444;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 6px 12px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        #btn-contraste:hover {
-            background-color: #fff;
-            color: #000;
-        }
-
-        /* Cabeçalho e Navegação */
-        header {
-            background-color: var(--cor-primaria);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .logo span {
-            color: #a3e2a5;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav ul li a {
-            color: var(--cor-link);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* Controle de Exibição das Páginas */
-        .pagina {
-            display: none;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: var(--bg-card);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .pagina.ativa {
-            display: block;
-        }
-
-        .pagina h2 {
-            margin-bottom: 15px;
-            color: var(--cor-primaria);
-        }
-
-        .pagina p {
-            margin-bottom: 15px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
-        .pagina ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://unsplash.com') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
         }
 
-        .pagina li {
+        header h1 {
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
-        /* Estilo Customizado para a Home */
-        .hero {
-            text-align: center;
-            padding: 40px 20px;
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--cor-primaria);
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        /* Formulário de Contato */
-        form {
-            display: flex;
-            flex-direction: column;
-            margin-top: 20px;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        label {
-            margin-bottom: 5px;
-            font-weight: bold;
+        /* Cards do Agro */
+        .card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-top: 5px solid var(--primary-color);
+            transition: transform 0.3s;
         }
 
-        input, textarea {
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
             margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: var(--bg-card);
-            color: var(--cor-texto);
         }
 
-        .btn-enviar {
-            background-color: var(--cor-primaria);
+        /* Botões */
+        .btn-info {
+            background-color: var(--primary-color);
             color: white;
-            padding: 12px;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 10px 20px;
             font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
             font-weight: bold;
+        }
+
+        .btn-info:hover {
+            background-color: #1e3f28;
+        }
+
+        /* Características Ocultas */
+        .caracteristicas {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, margin-top 0.3s ease-out;
+        }
+
+        .caracteristicas.ativo {
+            max-height: 300px; /* Altura máxima para a animação funcionar */
+            margin-top: 15px;
+        }
+
+        .caracteristicas ul {
+            list-style-type: none;
+        }
+
+        .caracteristicas li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        .caracteristicas li strong {
+            color: var(--secondary-color);
         }
 
         /* Rodapé */
         footer {
             text-align: center;
             padding: 20px;
-            background-color: #222;
+            background-color: var(--primary-color);
             color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ==========================================================================
-       2. ESTRUTURA DO HTML
-       ========================================================================== -->
-
-    <!-- Botão de Acessibilidade -->
-    <div class="acessibilidade-container">
-        <button id="btn-contraste" aria-label="Alternar alto contraste" title="Alto Contraste">👁️ Alto Contraste</button>
-    </div>
-
-    <!-- Cabeçalho -->
     <header>
-        <div class="logo">Agro<span>Futuro</span></div>
-        <nav>
-            <ul>
-                <li><a href="#" onclick="mudarPagina('home')">Home</a></li>
-                <li><a href="#" onclick="mudarPagina('sobre')">Sobre o Agro</a></li>
-                <li><a href="#" onclick="mudarPagina('tecnologia')">Tecnologia</a></li>
-                <li><a href="#" onclick="mudarPagina('contato')">Contato</a></li>
-            </ul>
-        </nav>
+        <h1>O Poder do Agronegócio</h1>
+        <p>Descubra os principais pilares e as características fundamentais que movem a produção no campo e alimentam o mundo.</p>
     </header>
 
-    <!-- Conteúdo das Páginas -->
-    <main id="conteudo-principal">
-        
-        <!-- Seção: Home -->
-        <section id="home" class="pagina ativa">
-            <div class="hero">
-                <h1>O Futuro do Agronegócio</h1>
-                <p>Alimentando o mundo através da inovação, sustentabilidade e tecnologia de ponta.</p>
+    <div class="container">
+        <div class="grid">
+
+            <!-- Card 1: Agricultura de Precisão -->
+            <div class="card">
+                <h2>Agricultura de Precisão</h2>
+                <p>Uso de alta tecnologia no gerenciamento do campo para otimizar a produção.</p>
+                <button class="btn-info" onclick="toggleInfo(this)">Ver Características</button>
+                <div class="caracteristicas">
+                    <ul>
+                        <li><strong>Drones e Satélites:</strong> Monitoramento em tempo real da saúde das lavouras.</li>
+                        <li><strong>GPS Agrícola:</strong> Direcionamento exato de tratores, evitando desperdício de insumos.</li>
+                        <li><strong>Análise de Solo:</strong> Aplicação de fertilizantes apenas onde é realmente necessário.</li>
+                    </ul>
+                </div>
             </div>
-        </section>
 
-        <!-- Seção: Sobre -->
-        <section id="sobre" class="pagina">
-            <h2>Sobre o Agronegócio</h2>
-            <p>O agronegócio é um dos pilares econômicos mais vitais do mundo. Ele engloba desde a produção no campo e fabricação de insumos até a distribuição de alimentos globalmente.</p>
-            <p>Atualmente, o principal desafio do setor é aumentar a produtividade e garantir a segurança alimentar mundial, reduzindo os impactos ambientais através de práticas sustentáveis.</p>
-        </section>
+            <!-- Card 2: Pecuária Sustentável -->
+            <div class="card">
+                <h2>Pecuária Sustentável</h2>
+                <p>Criação de animais focada no bem-estar e no respeito ao meio ambiente.</p>
+                <button class="btn-info" onclick="toggleInfo(this)">Ver Características</button>
+                <div class="caracteristicas">
+                    <ul>
+                        <li><strong>Integração ILPF:</strong> Integração Lavoura-Pecuária-Floresta para recuperar o solo.</li>
+                        <li><strong>Rastreabilidade:</strong> Histórico completo do animal desde o nascimento até o consumidor.</li>
+                        <li><strong>Manejo Rotacionado:</strong> Divisão de pastos para evitar a degradação da terra.</li>
+                    </ul>
+                </div>
+            </div>
 
-        <!-- Seção: Tecnologia -->
-        <section id="tecnologia" class="pagina">
-            <h2>Tecnologia no Campo</h2>
-            <p>A transformação digital modernizou o ambiente rural. Confira os principais recursos em alta:</p>
-            <ul>
-                <li><strong>Drones:</strong> Utilizados para mapeamento de áreas, monitoramento de saúde da plantação e pulverização precisa.</li>
-                <li><strong>Maquinário Inteligente:</strong> Tratores e colheitadeiras autônomas que operam via GPS e evitam o desperdício de combustível.</li>
-                <li><strong>Sensores de Solo:</strong> Dispositivos IoT que avaliam em tempo real a umidade, temperatura e necessidade de nutrientes da terra.</li>
-            </ul>
-        </section>
+            <!-- Card 3: Agroindústria -->
+            <div class="card">
+                <h2>Agroindústria</h2>
+                <p>A transformação das matérias-primas brutas do campo em produtos prontos.</p>
+                <button class="btn-info" onclick="toggleInfo(this)">Ver Características</button>
+                <div class="caracteristicas">
+                    <ul>
+                        <li><strong>Valor Agregado:</strong> Transforma grãos em óleos, rações e biocombustíveis.</li>
+                        <li><strong>Logística Complexa:</strong> Exige cadeias de frio e transporte rápido para evitar perdas.</li>
+                        <li><strong>Segurança Alimentar:</strong> Rigoroso controle de qualidade e padrões internacionais.</li>
+                    </ul>
+                </div>
+            </div>
 
-        <!-- Seção: Contato -->
-        <section id="contato" class="pagina">
-            <h2>Fale Conosco</h2>
-            <p>Dúvidas, sugestões ou propostas de parcerias comerciais? Preencha o formulário abaixo.</p>
-            <form onsubmit="event.preventDefault(); alert('Sua mensagem foi simulada com sucesso!');">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" required placeholder="Digite seu nome completo">
+        </div>
+    </div>
 
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" required placeholder="exemplo@email.com">
-
-                <label for="mensagem">Mensagem:</label>
-                <textarea id="mensagem" rows="4" required placeholder="Como podemos te ajudar?"></textarea>
-
-                <button type="submit" class="btn-enviar">Enviar Mensagem</button>
-            </form>
-        </section>
-
-    </main>
-
-    <!-- Rodapé -->
     <footer>
-        <p>&copy; 2026 AgroFuturo. Cultivando um amanhã melhor.</p>
+        <p>&copy; 2026 Portal do Agro - Conectando a tecnologia ao campo.</p>
     </footer>
 
-    <!-- ==========================================================================
-       3. LÓGICA DO JAVASCRIPT (SCRIPT)
-       ========================================================================== -->
     <script>
-        // Lógica de Navegação (Mudar de Página)
-        function mudarPagina(idPagina) {
-            // Busca todas as seções do site
-            const paginas = document.querySelectorAll('.pagina');
+        function toggleInfo(botao) {
+            // Encontra a div de características que está logo após o botão clicado
+            const caracteristicas = botao.nextElementSibling;
             
-            // Oculta todas as páginas removendo a classe 'ativa'
-            paginas.forEach(pagina => {
-                pagina.classList.remove('ativa');
-            });
-
-            // Mostra apenas a página selecionada adicionando a classe 'ativa'
-            const paginaAlvo = document.getElementById(idPagina);
-            if (paginaAlvo) {
-                paginaAlvo.classList.add('ativa');
+            // Alterna a classe 'ativo' para abrir ou fechar
+            caracteristicas.classList.toggle('ativo');
+            
+            // Muda o texto do botão de acordo com o estado
+            if (caracteristicas.classList.contains('ativo')) {
+                botao.textContent = "Ocultar Características";
+                botao.style.backgroundColor = "#8b5a2b"; // Muda a cor para marrom quando aberto
+            } else {
+                botao.textContent = "Ver Características";
+                botao.style.backgroundColor = "#2c5e3b"; // Volta para o verde original
             }
         }
-
-        // Lógica do Botão de Acessibilidade (Alto Contraste)
-        const btnContraste = document.getElementById('btn-contraste');
-
-        btnContraste.addEventListener('click', () => {
-            // Liga/Desliga a classe de contraste no elemento principal <body>
-            document.body.classList.toggle('alto-contraste');
-        });
     </script>
+
 </body>
 </html>

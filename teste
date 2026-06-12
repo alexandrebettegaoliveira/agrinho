@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo de Carro 2D</title>
+    <style>
+        body {
+            margin: 0;
+            background: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+        #gameCanvas {
+            border: 4px solid #fff;
+            background: #444;
+        }
+        #score {
+            position: absolute;
+            top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="score">Pontos: 0</div>
+    <canvas id="gameCanvas" width="400" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const scoreElement = document.getElementById("score");
+
+        let score = 0;
+        let gameOver = false;
+
+        // Configurações do jogador (Carro Azul)
+        const player = {
+            x: 175,
+            y: 420,
+            width: 50,
+            height: 70,
+            speed: 7
+        };
+
+        // Configurações do obstáculo (Carro Vermelho)
+        const obstacle = {
+            x: Math.random() * (canvas.width - 50),
+            y: -70,
+            width: 50,
+            height: 70,
+            speed: 5
+        };
+
+        // Controle do teclado
+        const keys = { Left: false, Right: false };
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") keys.Left = true;
+            if (e.key === "ArrowRight") keys.Right = true;
+        });
+
+        document.addEventListener("keyup", (e) => {
+            if (e.key === "ArrowLeft") keys.Left = false;
+            if (e.key === "ArrowRight") keys.Right = false;
+        });
+
+        // Loop principal do jogo
+        function update() {
+            if (gameOver) return;
+
+            // Limpa a tela
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Desenha a linha central da estrada (efeito de movimento)
+            ctx.strokeStyle = "#fff";
+            ctx.setLineDash([20, 20]);
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+
+            // Move o jogador
+            if (keys.Left && player.x > 0) player.x -= player.speed;
+            if (keys.Right && player.x < canvas.width - player.width) player.x += player.speed;
+
+            // Desenha o jogador (Retângulo azul simulando um carro)
+            ctx.fillStyle = "#00aaff";
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            // Move o obstáculo
+            obstacle.y += obstacle.speed;
+
+            // Desenha o obstáculo (Retângulo vermelho)
+            ctx.fillStyle = "#ff4444";
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+
+            // Verifica se o obstáculo passou da tela
+            if (obstacle.y > canvas.height) {
+                obstacle.y = -70;
+                obstacle.x = Math.random() * (canvas.width - obstacle.width);
+                score++;
+                obstacle.speed += 0.3; // Aumenta a velocidade aos poucos
+                scoreElement.innerText = "Pontos: " + score;
+            }
+
+            // Detecção de colisão simples
+            if (
+                player.x < obstacle.x + obstacle.width &&
+                player.x + player.width > obstacle.x &&
+                player.y < obstacle.y + obstacle.height &&
+                player.y + player.height > obstacle.y
+            ) {
+                gameOver = true;
+                ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "white";
+                ctx.font = "30px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText("Fim de Jogo!", canvas.width / 2, canvas.height / 2);
+                ctx.font = "20px Arial";
+                ctx.fillText("Atualize a página para reiniciar", canvas.width / 2, canvas.height / 2 + 40);
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Inicia o jogo
+        update();
+    </script>
+</body>
+</html>

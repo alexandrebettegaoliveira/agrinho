@@ -3,158 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Sementes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
-        h2 {
-            color: #2e7d32;
-            text-align: center;
-            margin-top: 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #1b5e20;
-        }
-        .resultado {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e8f5e9;
-            border-left: 5px solid #2e7d32;
-            border-radius: 5px;
-            display: none;
-        }
-        .resultado p {
-            margin: 5px 0;
-            color: #1b5e20;
-        }
-    </style>
+    <title>AgroTech - O Futuro do Campo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h2>Calculadora de Sementes</h2>
-    
-    <div class="form-group">
-        <label for="populacao">População Desejada (plantas/ha):</label>
-        <input type="number" id="populacao" value="300000" placeholder="Ex: 300000">
-    </div>
-    
-    <div class="form-group">
-        <label for="espacamento">Espaçamento entre Linhas (metros):</label>
-        <input type="number" id="espacamento" step="0.01" value="0.45" placeholder="Ex: 0.45">
-    </div>
-    
-    <div class="form-group">
-        <label for="pms">Peso de Mil Sementes - PMS (gramas):</label>
-        <input type="number" id="pms" value="180" placeholder="Ex: 180">
-    </div>
-    
-    <div class="form-group">
-        <label for="germinacao">Poder Germinativo / Pureza (%):</label>
-        <input type="number" id="germinacao" value="90" placeholder="Ex: 90">
-    </div>
-    
-    <div class="form-group">
-        <label for="area">Área Total do Plantio (hectares):</label>
-        <input type="number" id="area" value="10" placeholder="Ex: 10">
-    </div>
-    
-    <button onclick="calcularSementes()">Calcular Necessidade</button>
-    
-    <div class="resultado" id="blocoResultado">
-        <p><strong>Sementes por metro linear:</strong> <span id="resMetros">0</span> sementes/m</p>
-        <p><strong>Total de sementes necessárias:</strong> <span id="resTotalSementes">0</span> sementes</p>
-        <p><strong>Gasto de sementes por hectare:</strong> <span id="resKgHa">0</span> kg/ha</p>
-        <p><strong>Gasto total para a área:</strong> <span id="resTotalKg">0</span> kg</p>
-    </div>
-</div>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">Agro<span>Tech</span></div>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#tecnologia">Tecnologia</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
 
-<script>
-function calcularSementes() {
-    // 1. Captura os valores digitados pelo usuário no DOM
-    const populacao = parseFloat(document.getElementById('populacao').value);
-    const espacamento = parseFloat(document.getElementById('espacamento').value);
-    const pms = parseFloat(document.getElementById('pms').value);
-    const germinacao = parseFloat(document.getElementById('germinacao').value) / 100;
-    const area = parseFloat(document.getElementById('area').value);
+    <!-- Banner Principal -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Inovação e Sustentabilidade no Campo</h1>
+            <p>Conectando tecnologia de ponta com a produção agrícola para alimentar o futuro.</p>
+            <a href="#tecnologia" class="btn">Conhecer Soluções</a>
+        </div>
+    </section>
 
-    // Validação simples para evitar divisão por zero ou campos vazios
-    if (!populacao || !espacamento || !pms || !germinacao || !area) {
-        alert("Por favor, preencha todos os campos corretamente.");
-        return;
-    }
+    <!-- Seção Sobre -->
+    <section id="sobre" class="container">
+        <h2>Quem Somos</h2>
+        <p>Somos líderes na transformação digital do agronegócio. Desenvolvemos soluções inteligentes que aumentam a produtividade da lavoura, reduzem custos operacionais e respeitam o meio ambiente em cada etapa do processo.</p>
+    </section>
 
-    // 2. Lógica dos Cálculos Agronômicos
-    // Ajusta a população desejada com base no Valor Cultural (germinação/pureza)
-    const sementesAjustadasHa = populacao / germinacao;
+    <!-- Seção de Serviços/Tecnologia -->
+    <section id="tecnologia" class="features container">
+        <div class="card">
+            <h3>Drones e Mapeamento</h3>
+            <p>Monitoramento aéreo detalhado da saúde da lavoura em tempo real.</p>
+        </div>
+        <div class="card">
+            <h3>Gestão de Solo</h3>
+            <p>Análise de dados climáticos e sensores para irrigação precisa.</p>
+        </div>
+        <div class="card">
+            <h3>Automação</h3>
+            <p>Maquinários inteligentes que otimizam o plantio e a colheita.</p>
+        </div>
+    </section>
 
-    // Calcula quantos metros lineares de sulco existem em 1 hectare (10.000 m²)
-    const metrosLinearesPorHa = 10000 / espacamento;
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 AgroTech. Todos os direitos reservados.</p>
+    </footer>
 
-    // Sementes necessárias por metro linear de sulco
-    const sementesPorMetro = sementesAjustadasHa / metrosLinearesPorHa;
+    <!-- BOTÃO DE ACESSIBILIDADE -->
+    <button id="btnAcessibilidade" class="btn-acessibilidade" aria-label="Ativar Alto Contraste">♿</button>
 
-    // Total de sementes para a área inteira
-    const totalSementesArea = sementesAjustadasHa * area;
-
-    // Quilos de sementes por hectare (Regra de três usando o Peso de Mil Sementes)
-    const kgPorHa = (sementesAjustadasHa * pms) / 1000000;
-
-    // Quilos totais para cobrir toda a propriedade
-    const kgTotalArea = kgPorHa * area;
-
-    // 3. Exibe os resultados formatados na tela
-    document.getElementById('resMetros').innerText = sementesPorMetro.toFixed(2);
-    document.getElementById('resTotalSementes').innerText = Math.round(totalSementesArea).toLocaleString('pt-BR');
-    document.getElementById('resKgHa').innerText = kgPorHa.toFixed(2);
-    document.getElementById('resTotalKg').innerText = kgTotalArea.toFixed(2);
-
-    // Torna o bloco de resultados visível
-    document.getElementById('blocoResultado').style.display = 'block';
-}
-</script>
-
+    <script src="script.js"></script>
 </body>
+/* Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #1b4332;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header .logo span {
+    color: #52b788;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #52b788;
+}
+
+/* Banner Hero */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://unsplash.com') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: #52b788;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #40916c;
+}
+
+/* Seções */
+.container {
+    padding: 60px 10%;
+    text-align: center;
+}
+
+.features {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: #e9f5ed;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    flex: 1;
+}
+
+.card h3 {
+    color: #1b4332;
+    margin-bottom: 15px;
+}
+
+/* Rodapé */
+footer {
+    background-color: #1b4332;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}
+
+/* BOTÃO DE ACESSIBILIDADE (FIXADO) */
+.btn-acessibilidade {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #028090;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.btn-acessibilidade:hover {
+    transform: scale(1.1);
+}
+
+/* CLASSE DE ALTO CONTRASTE (Injetada pelo JS) */
+body.alto-contraste {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste header, 
+body.alto-contraste footer,
+body.alto-contraste .card {
+    background-color: #111 !important;
+    border: 1px solid #fff;
+    color: #fff !important;
+}
+
+body.alto-contraste nav a,
+body.alto-contraste .card h3 {
+    color: #ff0 !important; /* Amarelo destaca no fundo preto */
+}
+
+body.alto-contraste .btn {
+    background-color: #ff0 !important;
+    color: #000 !important;
+}
+// Seleciona o botão de acessibilidade
+const btnAcessibilidade = document.getElementById('btnAcessibilidade');
+
+// Adiciona evento de clique para alternar o modo de alto contraste
+btnAcessibilidade.addEventListener('click', () => {
+    // Alterna a classe no elemento <body>
+    document.body.classList.toggle('alto-contraste');
+    
+    // Alerta sonoro/texto simples para confirmar a ação
+    const ativo = document.body.classList.contains('alto-contraste');
+    console.log(ativo ? "Alto contraste ativado" : "Alto contraste desativado");
+});
 </html>
